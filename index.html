@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belgium B License Theory Practice</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f7fafc; }
+        .lesson-card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); cursor: pointer; }
+        .success-bg { background-color: #d1fae5; border-color: #34d399; }
+        .error-bg { background-color: #fee2e2; border-color: #f87171; }
+        .selected-answer { border-width: 3px; }
+        
+        .correct-feedback { border: 3px solid #10b981; background-color: #f0fdf4; }
+        .wrong-feedback { border: 3px solid #ef4444; background-color: #fef2f2; }
+        .correct-answer-option { border: 3px solid #10b981 !important; background-color: #d1fae5 !important; }
+        .user-wrong-option { border: 3px solid #ef4444 !important; background-color: #fee2e2 !important; }
+
+        /* Custom scrollbar for better look */
+        .scrollable-content::-webkit-scrollbar { width: 8px; }
+        .scrollable-content::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .scrollable-content::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        /* Ensure the image container handles aspect ratio nicely */
+        .image-container {
+            max-width: 100%;
+            height: auto; /* Allow height to adjust based on content/image */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 bg-gray-100">
+
+    <!-- Main Application Container -->
+    <div id="app" class="w-full max-w-4xl bg-white shadow-2xl rounded-xl p-6 md:p-10 transition-all duration-300">
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-blue-800">Rijbewijs B Theorie (BE)</h1>
+            <p class="text-md text-gray-600 mt-1">Oefen je kennis voor het theoretisch rijexamen</p>
+        </header>
+
+        <!-- Navigation/Mode Selection -->
+        <nav class="flex justify-center mb-8 space-x-4">
+            <button onclick="setMode('study')" id="study-btn" class="px-6 py-3 text-lg font-semibold rounded-lg transition-colors duration-200 shadow-md">
+                Studiemodus
+            </button>
+            <button onclick="setMode('exam')" id="exam-btn" class="px-6 py-3 text-lg font-semibold rounded-lg transition-colors duration-200 shadow-md">
+                Proefexamen (50 Vragen)
+            </button>
+        </nav>
+
+        <!-- Content Area -->
+        <div id="content-area" class="scrollable-content h-[60vh] overflow-y-auto pr-2">
+            <!-- Content will be rendered here by JavaScript -->
+        </div>
+
+    </div>
+
+    <!-- Modal for Results/Feedback -->
+    <div id="modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-xl p-8 w-full max-w-md shadow-2xl">
+            <h2 id="modal-title" class="text-2xl font-bold mb-4 text-center text-blue-800">Examen Resultaat</h2>
+            <div id="modal-body" class="mb-6 text-center text-gray-700"></div>
+            <div class="flex justify-center">
+                <button onclick="closeModal()" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200 shadow-lg">Sluiten</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA STRUCTURE: Belgian Theory Curriculum ---
+        const curriculum = [
+            { id: 'A', title: 'A. De openbare weg', color: 'bg-green-100', lessons: [
+                { id: 'A1', name: 'De rijbaan en de rijstroken', content: 'De definitie van een rijbaan, rijstroken en hun gebruik. Wat is een berm, en wat is een fietspad?', questions: 41 },
+                { id: 'A2', name: 'De snelweg en autowegen', content: 'Specifieke regels voor snelwegen: minimumsnelheid, verboden handelingen (keren, achteruitrijden, stilstaan op de pechstrook).', questions: 57 },
+                { id: 'A3', name: 'Bijzondere plaatsen', content: 'Regels rond rotondes, overwegen, bruggen, tunnels en schoolomgevingen.', questions: 43 },
+            ]},
+            { id: 'B', title: 'B. De weggebruikers', color: 'bg-yellow-100', lessons: [
+                { id: 'B1', name: 'Voetgangers en fietsers', content: 'Rechten en plichten van zwakke weggebruikers. Oversteken, gebruik van het fietspad.', questions: 27 },
+                { id: 'B2', name: 'Bestuurders', content: 'Definitie van een bestuurder, de algemene voorzichtigheidsplicht, en de positie op de weg.', questions: 18 },
+            ]},
+            { id: 'C', title: 'C. Het voertuig', color: 'bg-red-100', lessons: [
+                { id: 'C1', name: 'Massa en afmetingen', content: 'Maximum toegelaten massa (MTM) en de regels voor het vervoeren van ladingen en passagiers.', questions: 60 },
+                { id: 'C2', name: 'Verlichting en signalisatie', content: 'Correct gebruik van dimlichten, grootlichten, mistlichten en de claxon.', questions: 33 },
+            ]},
+            { id: 'D', title: 'D. De snelheid', color: 'bg-purple-100', lessons: [
+                { id: 'D1', name: 'Snelheidsbeperkingen', content: 'Algemene en lokale snelheidslimieten (binnen en buiten de bebouwde kom, zones 30).', questions: 59 },
+                { id: 'D2', name: 'Stop- en remafstand', content: 'Factoren die de stopafstand beïnvloeden (snelheid, reactietijd, weersomstandigheden).', questions: 16 },
+            ]},
+            { id: 'F', title: 'F. Voorrang en verkeerslichten', color: 'bg-blue-100', lessons: [
+                { id: 'F1', name: 'Voorrang van rechts', content: 'De algemene voorrangsregel en uitzonderingen (rotondes, T-kruispunten, borden).', questions: 41 },
+                { id: 'F2', name: 'Verkeerslichten en tekens', content: 'Betekenis van verschillende kleuren en symbolen. Handgebaren van bevoegde personen.', questions: 51 },
+                { id: 'F3', name: 'Kruisen en inhalen', content: 'Algemene regels voor inhalen, waar het verboden is, en veilig kruisen.', questions: 74 },
+            ]},
+            { id: 'I', title: 'I. Diverse bepalingen', color: 'bg-pink-100', lessons: [
+                { id: 'I1', name: 'Alcohol, drugs en medicatie', content: 'Wettelijke limieten en de gevolgen van rijden onder invloed. Boetes en sancties.', questions: 37 },
+                { id: 'I2', name: 'Ongevallen en hulpverlening', content: 'Gedrag bij ongevallen, de verplichtingen en de Eerste Hulp Bij Ongevallen (EHBO).', questions: 50 },
+            ]},
+        ];
+
+        // --- SAMPLE QUESTIONS (Simulating the Exam) ---
+        // The real exam has 50 questions, 5 of which are 'zware fouten' (serious mistakes).
+        // Score: 41/50 required. Each serious mistake costs -5 points.
+        const mockQuestions = [
+            // Question 1: Priority (with B1 Priority sign) - Corrected to B1 rule (Give Way)
+            {
+                topic: 'F. Voorrang',
+                text: 'U nadert een kruispunt en ziet het B1 bord (omgekeerde driehoek). Wat moet u doen?',
+                options: ['U heeft voorrang op alle andere voertuigen.', 'U moet voorrang verlenen aan bestuurders die van rechts komen.', 'U moet voorrang verlenen aan bestuurders op de dwarse weg.'],
+                correctAnswer: 2, // You must yield to traffic on the crossing road (Give Way)
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/E32636/ffffff?text=B1%20Voorrang+verlenen%20(Omgekeerde%20Driehoek)',
+                explanation: 'Het B1 bord, de omgekeerde driehoek met de rode rand, is het voorrangsbord. Het betekent dat u voorrang moet verlenen aan de bestuurders op de dwarse weg, zowel van links als van rechts.'
+            },
+            // Question 2: Serious mistake (Speed limit) (with C43 sign)
+            {
+                topic: 'D. Snelheid',
+                text: 'U rijdt in de bebouwde kom. Wat is de maximumsnelheid hier, tenzij anders aangegeven door een bord?',
+                options: ['30 km/u', '50 km/u', '70 km/u'],
+                correctAnswer: 1, // 50 km/u
+                serious: true, // Costs 5 points if wrong
+                imageUrl: 'https://placehold.co/500x300/E32636/ffffff?text=C43%20Snelheidslimiet%2050%20(Rode%20Rand)',
+                explanation: 'De algemene maximumsnelheid binnen de bebouwde kom in België is 50 km/u. Overschrijding van de snelheid met meer dan 10 km/u is een ernstige overtreding die zwaar bestraft wordt.'
+            },
+            // Question 3: Alcohol
+            {
+                topic: 'I. Alcohol',
+                text: 'Wat is het wettelijk alcoholgehalte (adem/bloed) waarbij u in België niet meer mag rijden?',
+                options: ['0.22 mg/l (adem) of 0.5‰ (bloed).', '0.35 mg/l (adem) of 0.8‰ (bloed).', 'Er is geen vaste limiet.'],
+                correctAnswer: 0, // 0.22 mg/l or 0.5‰
+                serious: true,
+                explanation: 'De wettelijke limiet is 0,22 mg/l uitgeademde lucht of 0,5 promille bloed. Boven deze limiet riskeert u een onmiddellijke intrekking van het rijbewijs en zware boetes.'
+            },
+            // Question 4: Parking (with E1 Parking prohibited sign)
+            {
+                topic: 'H. Parkeren',
+                text: 'U ziet dit verkeersbord. Mag u hier parkeren?',
+                options: ['Ja, tenzij het bord anders aangeeft.', 'Nee, dit is verboden.', 'Ja, maar enkel op weekdagen.'],
+                correctAnswer: 1, // No, forbidden
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/E32636/ffffff?text=E1%20Verboden%20te%20parkeren%20(Rode%20lijn)',
+                explanation: 'Het E1 bord (rode streep op blauwe achtergrond) betekent dat u hier niet mag parkeren. U mag hier wel stilstaan om iemand te laten in- of uitstappen, of om te laden en lossen.'
+            },
+            // Question 5: Mandatory check-up before driving
+            {
+                topic: 'C. Het voertuig',
+                text: 'Welke controle is essentieel voordat u vertrekt?',
+                options: ['De bandenspanning en de vloeistofniveaus.', 'Het bedienen van de radio en GPS.', 'De motor laten warmdraaien voor 10 minuten.'],
+                correctAnswer: 0, // Bandenspanning and levels
+                serious: false,
+                explanation: 'Het is de verantwoordelijkheid van de bestuurder om te zorgen dat het voertuig in veilige staat verkeert. Bandenspanning en vloeistofniveaus (olie, remvloeistof) zijn cruciaal voor de veiligheid.'
+            },
+             // Question 6: Overtaking
+            {
+                topic: 'E. Inhalen',
+                text: 'Is het toegestaan om een tram in te halen aan de linkerkant?',
+                options: ['Ja, altijd.', 'Nee, trams moeten altijd rechts ingehaald worden.', 'Ja, wanneer de breedte van de rijbaan dit toelaat en de tram stilstaat.'],
+                correctAnswer: 2, // Ja, when possible and tram is stationary
+                serious: false,
+                explanation: 'Een tram moet in principe rechts ingehaald worden. Inhalen aan de linkerkant is echter toegestaan als de breedte van de rijbaan het niet toelaat aan de rechterkant, of als de tram stilstaat om passagiers te laten in- en uitstappen.'
+            },
+             // Question 7: Bus lane (Image of bus lane marking)
+            {
+                topic: 'A. De openbare weg',
+                text: 'U rijdt over een busstrook aangeduid met een doorlopende witte lijn. Mag u deze busstrook gebruiken?',
+                options: ['Ja, indien u een bus inhaalt.', 'Nee, nooit, tenzij u een bevoegde wagen bent.', 'Ja, om af te slaan, indien toegestaan door de onderbroken lijn.'],
+                correctAnswer: 1, // Nee, nooit, tenzij u een bevoegde wagen bent.
+                serious: true,
+                imageUrl: 'https://placehold.co/500x300/A0A0A0/000000?text=Busstrook+met+doorlopende+witte+lijn',
+                explanation: 'Een busstrook met een doorlopende witte lijn mag door geen enkele andere weggebruiker gebruikt worden, tenzij u een bevoegd voertuig bent (bijv. politiewagen). Het onnodig betreden van de busstrook is een zware overtreding.'
+            },
+             // Question 8: Lights usage
+            {
+                topic: 'C. Het voertuig',
+                text: 'Wanneer moet u uw dimlichten voeren?',
+                options: ['Alleen als het regent.', 'Vanaf het vallen van de avond tot zonsopgang, of bij verminderde zichtbaarheid.', 'Alleen op de snelweg.'],
+                correctAnswer: 1, // Vanaf het vallen van de avond tot zonsopgang, of bij verminderde zichtbaarheid.
+                serious: false,
+                explanation: 'Dimlichten zijn verplicht in de periode tussen het vallen van de avond en zonsopgang, en op elk moment van de dag wanneer de zichtbaarheid beperkt is (bij mist, regen of sneeuw).'
+            },
+             // Question 9: Defensive driving
+            {
+                topic: 'B. De weggebruikers',
+                text: 'Wat is de beste strategie bij het naderen van een onoverzichtelijk kruispunt?',
+                options: ['Snel doorrijden om de doorstroming te bevorderen.', 'Remmen, vertragen en klaar zijn om te stoppen.', 'Claxonneren om andere bestuurders te waarschuwen.'],
+                correctAnswer: 1, // Remmen, vertragen en klaar zijn om te stoppen.
+                serious: false,
+                explanation: 'Defensief rijden betekent altijd anticiperen op gevaar. Bij een onoverzichtelijk kruispunt moet u altijd vertragen en klaar zijn om te remmen voor plotseling opkomend verkeer of voetgangers.'
+            },
+             // Question 10: Hazard lights
+            {
+                topic: 'I. Diversen',
+                text: 'Wanneer mag u de alarmlichten (waarschuwingsknipperlichten) gebruiken?',
+                options: ['Wanneer u geparkeerd staat om boodschappen te doen.', 'Om andere bestuurders te bedanken na een inhaalmanoeuvre.', 'Om andere bestuurders te waarschuwen voor dreigend gevaar of als uw voertuig defect is.'],
+                correctAnswer: 2, // Om andere bestuurders te waarschuwen voor dreigend gevaar of als uw voertuig defect is.
+                serious: false,
+                explanation: 'Alarmlichten dienen uitsluitend om andere weggebruikers te waarschuwen voor een dreigend gevaar of wanneer uw voertuig defect is en een obstakel vormt.'
+            },
+        ];
+        
+        // Pad the question bank to 50 questions (for the exam simulation)
+        // In a real app, you would load a database of 800+ questions.
+        for (let i = mockQuestions.length; i < 50; i++) {
+            const baseQuestion = mockQuestions[i % 10];
+            // Ensure explanations are consistent even for generated questions
+            const explanationText = baseQuestion.explanation || 'Geen specifieke uitleg beschikbaar voor deze oefenvraag.';
+            
+            mockQuestions.push({
+                ...baseQuestion,
+                text: baseQuestion.text.replace(`(Vraag ${i % 10 + 1}/50)`, '') + ` (Vraag ${i + 1}/50)`,
+                serious: (i % 5 === 0) ? true : false, // Ensure 10 serious faults total
+                explanation: explanationText
+            });
+        }
+        
+        // --- APPLICATION STATE ---
+        let currentMode = 'study'; // 'study' or 'exam'
+        let currentLessonId = null;
+        let currentQuestionIndex = 0;
+        let examAnswers = new Array(50).fill(null); // Stores the index of the selected option
+        let isExamFinished = false;
+        let isAnswerSubmitted = false; // NEW: Flag to control feedback display
+
+        // --- UTILITY FUNCTIONS ---
+        const $ = (id) => document.getElementById(id);
+
+        function setMode(mode) {
+            currentMode = mode;
+            currentLessonId = null; // Reset lesson view
+            isExamFinished = false;
+            isAnswerSubmitted = false; // Reset feedback state
+            
+            // Update button styles
+            const studyBtn = $('study-btn');
+            const examBtn = $('exam-btn');
+
+            if (mode === 'study') {
+                studyBtn.classList.add('bg-blue-600', 'text-white');
+                studyBtn.classList.remove('bg-white', 'text-blue-800', 'hover:bg-gray-100');
+                examBtn.classList.add('bg-white', 'text-blue-800', 'hover:bg-gray-100');
+                examBtn.classList.remove('bg-blue-600', 'text-white');
+                renderStudyMode();
+            } else {
+                examBtn.classList.add('bg-blue-600', 'text-white');
+                examBtn.classList.remove('bg-white', 'text-blue-800', 'hover:bg-gray-100');
+                studyBtn.classList.add('bg-white', 'text-blue-800', 'hover:bg-gray-100');
+                studyBtn.classList.remove('bg-blue-600', 'text-white');
+                startExam();
+            }
+        }
+
+        // --- STUDY MODE RENDERING (No change in logic, only structure updated) ---
+        function renderStudyMode() {
+            if (currentLessonId) {
+                renderLessonView();
+            } else {
+                renderCurriculumOverview();
+            }
+        }
+
+        function renderCurriculumOverview() {
+            let html = '<h2 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">Deel de theorie op in hoofdstukken</h2>';
+            
+            curriculum.forEach(section => {
+                html += `<div class="${section.color} p-4 rounded-xl shadow-lg mb-6">
+                            <h3 class="text-xl font-extrabold text-gray-900 mb-3">${section.title}</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">`;
+                
+                section.lessons.forEach(lesson => {
+                    html += `<div onclick="selectLesson('${lesson.id}')" class="lesson-card bg-white p-4 rounded-lg shadow transition duration-300 border-l-4 border-blue-500">
+                                <p class="font-semibold text-blue-700">${lesson.name}</p>
+                                <p class="text-sm text-gray-500">${lesson.questions} oefenvragen beschikbaar</p>
+                            </div>`;
+                });
+                
+                html += `</div></div>`;
+            });
+
+            $('content-area').innerHTML = html;
+        }
+
+        function selectLesson(id) {
+            currentLessonId = id;
+            renderLessonView();
+        }
+
+        function renderLessonView() {
+            const lesson = curriculum.flatMap(s => s.lessons).find(l => l.id === currentLessonId);
+            if (!lesson) {
+                renderCurriculumOverview();
+                return;
+            }
+
+            // Find parent topic for navigation
+            const parent = curriculum.find(s => s.lessons.includes(lesson));
+
+            const html = `
+                <button onclick="currentLessonId = null; renderStudyMode();" class="flex items-center text-blue-600 hover:text-blue-800 font-semibold mb-4">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    Terug naar overzicht
+                </button>
+                <div class="p-6 rounded-xl shadow-xl bg-white border-t-4 border-blue-500">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2">${lesson.name}</h2>
+                    <p class="text-md text-gray-600 mb-6">${parent.title}</p>
+                    
+                    <!-- Placeholder Content Warning -->
+                    <div class="bg-yellow-50 border-l-4 border-yellow-500 text-yellow-800 p-4 mb-6 rounded">
+                        <p class="font-semibold">Informatie Placeholder:</p>
+                        <p class="text-sm">Dit is een tijdelijke tekst. In de definitieve app moet hier de volledige theorie over: *${lesson.name}* komen uit de officiële Wegcode.</p>
+                    </div>
+
+                    <p class="text-lg text-gray-700 leading-relaxed">${lesson.content}</p>
+
+                    <div class="mt-8 pt-4 border-t">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Oefenvragen (${lesson.questions} beschikbaar)</h3>
+                        <p class="text-gray-600">Start hier met het oefenen van de ${lesson.questions} vragen die bij dit hoofdstuk horen. (In de volledige app zullen de vragen hier getoond worden.)</p>
+                        <button class="mt-4 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-200 shadow-md">Start Vragen</button>
+                    </div>
+                </div>
+            `;
+            $('content-area').innerHTML = html;
+        }
+
+
+        // --- EXAM MODE LOGIC ---
+
+        function startExam() {
+            // Reset state for a new exam
+            examAnswers = new Array(50).fill(null);
+            currentQuestionIndex = 0;
+            isExamFinished = false;
+            isAnswerSubmitted = false; // Reset feedback state
+            renderExamView();
+        }
+
+        function renderExamView() {
+            const contentArea = $('content-area');
+            contentArea.innerHTML = '';
+            
+            if (isExamFinished) {
+                return calculateAndShowResults();
+            }
+
+            const q = mockQuestions[currentQuestionIndex];
+            const userAnswerIndex = examAnswers[currentQuestionIndex];
+            const isCorrect = userAnswerIndex === q.correctAnswer;
+
+            // Progress Tracker
+            let progressHtml = '<div class="flex flex-wrap justify-start gap-1 mb-6 p-2 bg-gray-50 rounded-lg shadow-inner">';
+            for (let i = 0; i < 50; i++) {
+                const isCurrent = i === currentQuestionIndex;
+                const isAnswered = examAnswers[i] !== null;
+                let bgColor = 'bg-gray-300';
+                if (isCurrent) bgColor = 'bg-blue-600 text-white font-bold shadow-md';
+                else if (isAnswered) bgColor = 'bg-green-300';
+                
+                progressHtml += `<button onclick="goToQuestion(${i})" class="w-8 h-8 flex items-center justify-center text-xs rounded-md ${bgColor} hover:opacity-75 transition duration-150">${i + 1}</button>`;
+            }
+            progressHtml += '</div>';
+            
+            // --- START Question View with Image first ---
+            
+            let questionHtml = '';
+            
+            // 1. Image Display (if available) - PLACED AT THE TOP
+            if (q.imageUrl) {
+                questionHtml += `
+                    <div class="flex justify-center mb-6 p-4 bg-gray-50 rounded-lg shadow-inner image-container">
+                        <img src="${q.imageUrl}" alt="Verkeerssituatie of Verkeersbord" 
+                             onerror="this.onerror=null; this.src='https://placehold.co/500x300/cccccc/333333?text=Afbeelding+niet+gevonden'" 
+                             class="w-full max-w-full h-auto rounded-md border border-gray-300"/>
+                    </div>
+                `;
+            }
+
+            // 2. Question Text and Metadata
+            questionHtml += `
+                <div class="mb-4">
+                    <span class="text-sm font-semibold text-gray-600">${q.topic}</span>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-800 mt-1">${currentQuestionIndex + 1} van 50: ${q.text}</h3>
+                    ${q.serious ? '<p class="text-sm text-red-600 font-semibold mt-1">Dit is een zware fout (kost -5 punten indien fout)!</p>' : ''}
+                </div>
+                
+                <div class="space-y-4">
+            `;
+
+            // 3. Answer Options
+            q.options.forEach((option, index) => {
+                let optionClass = 'border-gray-300 bg-white hover:bg-gray-50';
+                let onClickAction = `selectAnswer(${index})`;
+                
+                if (isAnswerSubmitted && examAnswers[currentQuestionIndex] !== null) {
+                    // Feedback mode: apply colors and disable clicks
+                    onClickAction = ''; 
+                    
+                    if (index === q.correctAnswer) {
+                        optionClass = 'correct-answer-option';
+                    } else if (index === userAnswerIndex && !isCorrect) {
+                        optionClass = 'user-wrong-option';
+                    } else if (index === userAnswerIndex && isCorrect) {
+                         optionClass = 'correct-answer-option'; // User answered correctly
+                    } else {
+                        optionClass = 'border-gray-300 bg-white opacity-60 cursor-default';
+                    }
+                } else if (index === userAnswerIndex) {
+                     // Selection mode: highlight selected answer before submission
+                    optionClass = 'selected-answer border-blue-600 bg-blue-50';
+                }
+
+                questionHtml += `
+                    <button onclick="${onClickAction}" 
+                            class="w-full text-left p-4 border-2 rounded-lg transition duration-200 shadow ${optionClass} ${isAnswerSubmitted ? 'cursor-default' : ''}">
+                        <span class="font-semibold mr-3">${String.fromCharCode(65 + index)}.</span> ${option}
+                    </button>
+                `;
+            });
+
+            questionHtml += `</div>`;
+
+            // 4. Feedback Box (Only visible after submission)
+            if (isAnswerSubmitted) {
+                const feedbackClass = isCorrect ? 'correct-feedback' : 'wrong-feedback';
+                const feedbackTitle = isCorrect ? '✅ Correct! Goed gedaan.' : '❌ Fout. Dit is de reden:';
+                
+                questionHtml += `
+                    <div class="mt-8 p-4 rounded-lg shadow-lg ${feedbackClass}">
+                        <h4 class="text-xl font-bold mb-2 ${isCorrect ? 'text-green-800' : 'text-red-800'}">${feedbackTitle}</h4>
+                        <p class="text-gray-700 leading-relaxed">${q.explanation}</p>
+                    </div>
+                `;
+            }
+
+            // Navigation Buttons
+            let navHtml = `
+                <div class="flex justify-between mt-8 pt-4 border-t">
+                    <button onclick="previousQuestion()" 
+                            class="px-6 py-3 bg-gray-500 text-white font-semibold rounded-lg hover:bg-gray-600 transition duration-200 shadow-md ${currentQuestionIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''}">
+                        Vorige
+                    </button>
+                    ${isAnswerSubmitted ? // Show 'Volgende' only after feedback is given
+                        currentQuestionIndex < 49 ? `
+                        <button onclick="nextQuestion()" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200 shadow-md">
+                            Volgende
+                        </button>`
+                        : `<button onclick="finishExamConfirmation()" class="px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition duration-200 shadow-md">
+                            Examen Beëindigen
+                        </button>`
+                    : // If answer not submitted, disable forward navigation to prevent skipping
+                        `<button class="px-6 py-3 bg-gray-300 text-gray-700 font-semibold rounded-lg cursor-not-allowed shadow-md">
+                            Selecteer een antwoord
+                        </button>`
+                    }
+                </div>
+            `;
+
+            contentArea.innerHTML = progressHtml + questionHtml + navHtml;
+        }
+
+        function selectAnswer(answerIndex) {
+            if (isExamFinished || isAnswerSubmitted) return; 
+            
+            examAnswers[currentQuestionIndex] = answerIndex;
+            isAnswerSubmitted = true; // Enter feedback mode
+            renderExamView(); 
+        }
+
+        function goToQuestion(index) {
+            currentQuestionIndex = index;
+            isAnswerSubmitted = examAnswers[index] !== null; // Show feedback if already answered
+            renderExamView();
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < 49) {
+                currentQuestionIndex++;
+                isAnswerSubmitted = examAnswers[currentQuestionIndex] !== null;
+                renderExamView();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                isAnswerSubmitted = examAnswers[currentQuestionIndex] !== null;
+                renderExamView();
+            }
+        }
+
+        function finishExamConfirmation() {
+            const unanswered = examAnswers.filter(a => a === null).length;
+            if (unanswered > 0) {
+                 showModal('Let op!', `Je hebt nog ${unanswered} vragen onbeantwoord. Wil je het examen toch beëindigen?`, true, calculateAndShowResults);
+            } else {
+                calculateAndShowResults();
+            }
+        }
+        
+        // --- RESULT CALCULATION (No change in logic, only structure updated) ---
+
+        function calculateAndShowResults() {
+            isExamFinished = true;
+            let totalScore = 50; // Start with 50 points, 1 point per correct answer if not a serious mistake
+            let correctCount = 0;
+            let seriousMistakesCount = 0;
+
+            mockQuestions.forEach((q, index) => {
+                const userAnswer = examAnswers[index];
+                const isCorrect = userAnswer === q.correctAnswer;
+
+                if (isCorrect) {
+                    correctCount++;
+                } else if (q.serious && !isCorrect) {
+                    // Serious mistake (fout op zware fout): -5 points
+                    totalScore -= 5;
+                    seriousMistakesCount++;
+                } else if (!q.serious && !isCorrect) {
+                    // Simple mistake: -1 point
+                    totalScore -= 1;
+                }
+            });
+            
+            // The actual passing score is 41/50, but we need to check the serious faults rule (max 2 serious faults allowed)
+            const passedScore = totalScore >= 41;
+            const passedSeriousFaults = seriousMistakesCount <= 5; // Making 6 serious errors (30 points loss) means you can only score 20, which is a fail.
+            const passed = passedScore && passedSeriousFaults;
+
+            // Render result view
+            const contentArea = $('content-area');
+            let resultHtml = `
+                <h2 class="text-3xl font-bold mb-4 text-center ${passed ? 'text-green-600' : 'text-red-600'}">
+                    ${passed ? 'Geslaagd! 🎉' : 'Niet Geslaagd 😔'}
+                </h2>
+                <div class="grid grid-cols-2 gap-4 text-lg mb-6">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <p class="font-semibold text-gray-700">Behaalde Score:</p>
+                        <p class="text-3xl font-bold text-blue-700">${totalScore}/50</p>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <p class="font-semibold text-gray-700">Correcte Antwoorden:</p>
+                        <p class="text-3xl font-bold text-green-700">${correctCount}/50</p>
+                    </div>
+                </div>
+                <div class="bg-red-50 p-4 rounded-lg mb-8">
+                    <p class="font-semibold text-gray-700">Aantal Zware Fouten:</p>
+                    <p class="text-3xl font-bold text-red-700">${seriousMistakesCount} (Max 5 toegelaten)</p>
+                </div>
+
+                <h3 class="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">Overzicht van uw antwoorden</h3>
+                <div class="space-y-2">
+            `;
+
+            mockQuestions.forEach((q, index) => {
+                const userAnswer = examAnswers[index];
+                const isCorrect = userAnswer === q.correctAnswer;
+                const correctOptionText = q.options[q.correctAnswer];
+                const userOptionText = userAnswer !== null ? q.options[userAnswer] : 'Niet beantwoord';
+                const bgColor = isCorrect ? 'success-bg' : 'error-bg';
+
+                resultHtml += `
+                    <div class="${bgColor} p-3 rounded-lg border-l-4 ${isCorrect ? 'border-green-500' : 'border-red-500'}">
+                        <p class="font-bold">Vraag ${index + 1}: ${q.text}</p>
+                        ${q.imageUrl ? `<img src="${q.imageUrl}" alt="Verkeerssituatie of Verkeersbord" class="mt-2 mb-2 max-w-full md:max-w-xs h-auto rounded border border-gray-400"/>` : ''}
+                        <p class="text-sm">Uw antwoord: <span class="font-semibold ${isCorrect ? 'text-green-700' : 'text-red-700'}">${userOptionText}</span></p>
+                        <p class="text-sm">Juiste antwoord: <span class="font-semibold text-green-700">${correctOptionText}</span></p>
+                        <p class="text-sm mt-1 border-t pt-1">Uitleg: ${q.explanation}</p>
+                    </div>
+                `;
+            });
+
+            resultHtml += `</div>
+                <div class="flex justify-center mt-8 pt-4 border-t">
+                    <button onclick="startExam()" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200 shadow-lg">Opnieuw Proefexamen</button>
+                </div>
+            `;
+            
+            contentArea.innerHTML = resultHtml;
+            // Optionally, show results in a modal too
+            showModal('Examen Resultaat', `Je hebt een score van ${totalScore}/50 behaald en ${passedSeriousFaults ? 'voldoet' : 'voldoet niet'} aan de zware fouten regel. ${passed ? 'Gefeliciteerd!' : 'Oefen nog even verder.'}`, false);
+        }
+
+        // --- MODAL UTILITIES ---
+
+        function showModal(title, body, confirm = false, onConfirm = null) {
+            $('modal-title').textContent = title;
+            $('modal-body').innerHTML = `<p>${body}</p>`;
+            const modal = $('modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // Handle confirmation button
+            const confirmBtn = modal.querySelector('button');
+            if (confirm) {
+                confirmBtn.textContent = 'Bevestigen';
+                confirmBtn.onclick = () => { closeModal(); if (onConfirm) onConfirm(); };
+            } else {
+                confirmBtn.textContent = 'Sluiten';
+                confirmBtn.onclick = closeModal;
+            }
+        }
+
+        function closeModal() {
+            const modal = $('modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // --- INITIALIZATION ---
+        window.onload = () => {
+            setMode('study'); // Start in Study Mode
+        };
+
+    </script>
+</body>
+</html>
