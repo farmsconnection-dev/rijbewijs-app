@@ -16,7 +16,7 @@
         .correct-feedback { border: 3px solid #10b981; background-color: #f0fdf4; }
         .wrong-feedback { border: 3px solid #ef4444; background-color: #fef2f2; }
         .correct-answer-option { border: 3px solid #10b981 !important; background-color: #d1fae5 !important; }
-        .user-wrong-option { border: 3px solid #ef4444 !important; background-color: #fee2e2 !important; }
+        .user-wrong-option { border: 3px solid #ef4444 !important; background-color: #fef2f2 !important; }
 
         /* Custom scrollbar for better look */
         .scrollable-content::-webkit-scrollbar { width: 8px; }
@@ -70,30 +70,100 @@
         // --- DATA STRUCTURE: Belgian Theory Curriculum ---
         const curriculum = [
             { id: 'A', title: 'A. De openbare weg', color: 'bg-green-100', lessons: [
-                { id: 'A1', name: 'De rijbaan en de rijstroken', content: 'De definitie van een rijbaan, rijstroken en hun gebruik. Wat is een berm, en wat is een fietspad?', questions: 41 },
-                { id: 'A2', name: 'De snelweg en autowegen', content: 'Specifieke regels voor snelwegen: minimumsnelheid, verboden handelingen (keren, achteruitrijden, stilstaan op de pechstrook).', questions: 57 },
-                { id: 'A3', name: 'Bijzondere plaatsen', content: 'Regels rond rotondes, overwegen, bruggen, tunnels en schoolomgevingen.', questions: 43 },
+                { 
+                    id: 'A1', 
+                    name: 'De rijbaan en de rijstroken', 
+                    content: 'De openbare weg omvat de rijbaan, de bermen, de parkeerplaatsen, de voetpaden, en de fietspaden. De **rijbaan** is het deel van de openbare weg dat is bestemd voor het verkeer van voertuigen. Binnen de bebouwde kom of op drukke wegen kan de rijbaan verdeeld zijn in **rijstroken**, aangeduid met doorlopende of onderbroken witte lijnen. Het is verplicht om zo rechts mogelijk te rijden op de rijbaan. Rijstroken dienen om de doorstroming te verbeteren en het is verboden om onnodig van rijstrook te veranderen. De **berm** (strook naast de rijbaan) is in principe niet bestemd voor verkeer, tenzij het bord F99 (Pechstrook) anders aanduidt, of in geval van nood. ',
+                    questions: 41 
+                },
+                { 
+                    id: 'A2', 
+                    name: 'De snelweg en autowegen', 
+                    content: 'De snelweg (aangeduid door bord F5) en autowegen (aangeduid door bord F3) zijn wegen uitsluitend bestemd voor snel motorvoertuigen, ontworpen voor snel en veilig verkeer over lange afstanden. \n\n**Toegang en Minimumsnelheid**\nOp de snelweg en autowegen mag u alleen rijden met motorvoertuigen die op een horizontale weg **minstens 70 km/u** kunnen en mogen rijden. Landbouwvoertuigen, voetgangers en fietsers zijn er verboden.\n\n**Algemene Snelheidslimiet:** De maximumsnelheid in België is 120 km/u, tenzij anders aangegeven door borden of dynamische verkeersborden.\n\n**Verboden Handelingen**\nOp de snelweg en autowegen is het strikt verboden om:\n* **Keren** (omkeren) of achteruitrijden.\n* **Stilstaan of Parkeren** op de rijbaan, de in- en uitvoegstroken of de middenberm. Dit is alleen toegestaan op parkeerplaatsen of in noodgevallen op de pechstrook (indien aanwezig).\n* **Op de Pechstrook Rijden:** De pechstrook is uitsluitend voorbehouden voor voertuigen die in panne staan. Bij file kan de rijstrook links van de pechstrook opengesteld worden voor verkeer, maar dit wordt altijd aangegeven met een Groene Pijl op een dynamisch bord.\n\n**Invoegen en Uitvoegen**\nBij het **invoegen** moet u de snelheid aanpassen aan het verkeer op de snelweg en voorrang verlenen aan de bestuurders die al op de snelweg rijden. Bij het **uitvoegen** moet u tijdig de uitvoegstrook gebruiken en zo nodig vertragen.', 
+                    questions: 57 
+                },
+                { 
+                    id: 'A3', 
+                    name: 'Bijzondere plaatsen', 
+                    content: 'Dit hoofdstuk behandelt de regels op en rond speciale weggedeelten:\n\n**Rotondes (Verkeerspleinen):** De bestuurder die op de rotonde rijdt, heeft voorrang op de bestuurder die de rotonde wil oprijden, tenzij verkeersborden anders aanduiden. Bij het verlaten van de rotonde is het gebruik van de richtingaangever (pinker) verplicht. \n\n**Overwegen:** Bij het naderen van een overweg (aangeduid met bord A45 of A46), moet u altijd stoppen zodra de slagbomen dichtgaan, het rode licht knippert, of het belgeluid afgaat. Het is verboden om in te halen bij of vlak voor een overweg.\n\n**Tunnels:** In tunnels is het verplicht de dimlichten te voeren, tenzij anders aangegeven. Het is verboden om te keren of achteruit te rijden in een tunnel. Bij file moet de bestuurder een veilige afstand bewaren tot de voorligger. ',
+                    questions: 43 
+                },
             ]},
             { id: 'B', title: 'B. De weggebruikers', color: 'bg-yellow-100', lessons: [
-                { id: 'B1', name: 'Voetgangers en fietsers', content: 'Rechten en plichten van zwakke weggebruikers. Oversteken, gebruik van het fietspad.', questions: 27 },
-                { id: 'B2', name: 'Bestuurders', content: 'Definitie van een bestuurder, de algemene voorzichtigheidsplicht, en de positie op de weg.', questions: 18 },
+                { 
+                    id: 'B1', 
+                    name: 'Voetgangers en fietsers', 
+                    content: 'Voetgangers en fietsers zijn "zwakke weggebruikers" en genieten extra bescherming. Op een **zebrapad** (oversteekplaats voor voetgangers) heeft een voetganger die de rijbaan betreedt of op het punt staat dit te doen, altijd voorrang op de bestuurders, tenzij het zebrapad geregeld wordt door verkeerslichten of een bevoegd persoon. \n\n**Fietsers:** Fietsers moeten in principe het fietspad gebruiken als dit aanwezig is (verplichting). Als er geen fietspad is, mogen zij de rijbaan gebruiken. Bestuurders moeten bij het passeren van een fietser of voetganger altijd een veilige zijdelingse afstand bewaren (minimaal 1 meter in de bebouwde kom, 1,5 meter buiten de bebouwde kom).', 
+                    questions: 27 
+                },
+                { 
+                    id: 'B2', 
+                    name: 'Bestuurders', 
+                    content: 'Een bestuurder is elke persoon die een voertuig bestuurt of dieren drijft. De **Algemene Voorzichtigheidsplicht** is van toepassing: elke bestuurder moet constant in staat zijn om alle nodige rijbewegingen uit te voeren en moet voorzichtig en omzichtig rijden om ongevallen te voorkomen. \n\n**Gordelplicht:** Bestuurders en passagiers zijn verplicht een veiligheidsgordel te dragen. Kinderen moeten in een geschikt kinderzitje vervoerd worden, tenzij hun lengte meer dan 1,35 meter bedraagt.', 
+                    questions: 18 
+                },
             ]},
             { id: 'C', title: 'C. Het voertuig', color: 'bg-red-100', lessons: [
-                { id: 'C1', name: 'Massa en afmetingen', content: 'Maximum toegelaten massa (MTM) en de regels voor het vervoeren van ladingen en passagiers.', questions: 60 },
-                { id: 'C2', name: 'Verlichting en signalisatie', content: 'Correct gebruik van dimlichten, grootlichten, mistlichten en de claxon.', questions: 33 },
+                { 
+                    id: 'C1', 
+                    name: 'Massa en afmetingen', 
+                    content: 'De **Maximum Toegelaten Massa (MTM)** is het maximale gewicht dat een voertuig mag wegen, inclusief de lading en inzittenden. Het is verboden om deze massa te overschrijden. Lading moet zodanig gezekerd zijn dat deze tijdens het rijden, remmen of uitwijken niet kan verschuiven of vallen. \n\n**Uitsteek Lading:** Lading mag maximaal 1 meter achter de auto uitsteken en niet meer dan 3 meter achter de achteras. Als de lading meer dan 1 meter uitsteekt, moet deze overdag gemarkeerd worden met een rode vlag of bord, en \'s nachts met een rood licht en reflector.', 
+                    questions: 60 
+                },
+                { 
+                    id: 'C2', 
+                    name: 'Verlichting en signalisatie', 
+                    content: 'Correct gebruik van de verlichting is essentieel voor de veiligheid. **Dimlichten** zijn verplicht vanaf het vallen van de avond tot zonsopgang en overdag bij verminderde zichtbaarheid (regen, mist, sneeuw). **Grootlichten** mogen alleen gebruikt worden buiten de bebouwde kom bij onvoldoende verlichting, en moeten gedoofd worden bij tegenliggers of een voorligger. **Mistlichten** mogen alleen gebruikt worden bij mist of sneeuwval waardoor de zichtbaarheid minder dan 100 meter is, of bij zware regenval.', 
+                    questions: 33 
+                },
             ]},
             { id: 'D', title: 'D. De snelheid', color: 'bg-purple-100', lessons: [
-                { id: 'D1', name: 'Snelheidsbeperkingen', content: 'Algemene en lokale snelheidslimieten (binnen en buiten de bebouwde kom, zones 30).', questions: 59 },
-                { id: 'D2', name: 'Stop- en remafstand', content: 'Factoren die de stopafstand beïnvloeden (snelheid, reactietijd, weersomstandigheden).', questions: 16 },
+                { 
+                    id: 'D1', 
+                    name: 'Snelheidsbeperkingen', 
+                    content: 'De algemene snelheidslimieten in België zijn:\n* **Binnen de bebouwde kom:** 50 km/u.\n* **Buiten de bebouwde kom:** 70 of 90 km/u (afhankelijk van de gewestelijke regels). \n\n**Zone 30:** Dit geldt in schoolomgevingen en woonwijken en moet strikt gerespecteerd worden. Snelheidsovertredingen zijn zware fouten.', 
+                    questions: 59 
+                },
+                { 
+                    id: 'D2', 
+                    name: 'Stop- en remafstand', 
+                    content: 'De **stopafstand** is de afstand die nodig is om volledig tot stilstand te komen, en bestaat uit de **reactieafstand** (afstand afgelegd tijdens de reactietijd, ca. 1 seconde) plus de **remsafstand** (afstand afgelegd tijdens het daadwerkelijk remmen). \n\n**Factoren:** Snelheid (de stopafstand verviervoudigt bij een verdubbeling van de snelheid), toestand van de weg (nat/glad), en reactietijd van de bestuurder (alcohol, vermoeidheid) beïnvloeden de afstand.', 
+                    questions: 16 
+                },
             ]},
             { id: 'F', title: 'F. Voorrang en verkeerslichten', color: 'bg-blue-100', lessons: [
-                { id: 'F1', name: 'Voorrang van rechts', content: 'De algemene voorrangsregel en uitzonderingen (rotondes, T-kruispunten, borden).', questions: 41 },
-                { id: 'F2', name: 'Verkeerslichten en tekens', content: 'Betekenis van verschillende kleuren en symbolen. Handgebaren van bevoegde personen.', questions: 51 },
-                { id: 'F3', name: 'Kruisen en inhalen', content: 'Algemene regels voor inhalen, waar het verboden is, en veilig kruisen.', questions: 74 },
+                { 
+                    id: 'F1', 
+                    name: 'Voorrang van rechts', 
+                    content: 'De basisregel is dat op kruispunten waar geen verkeerslichten, borden, of bevoegde personen zijn, de bestuurder van rechts voorrang heeft. Uitzonderingen zijn onder meer rotondes, onverharde wegen en straten die eindigen in een T-splitsing (waarbij de bestuurder die van de onverharde weg komt, of de bestuurder op de dwarse weg, voorrang moet verlenen). \n\n**Voorrangsborden:** Borden (B1, B3, B5) heffen de regel van voorrang van rechts op.', 
+                    questions: 41 
+                },
+                { 
+                    id: 'F2', 
+                    name: 'Verkeerslichten en tekens', 
+                    content: 'Verkeerslichten (rood, oranje, groen) bepalen wie er mag rijden. **Rood** betekent stoppen. **Oranje** betekent stoppen, tenzij u dit niet meer veilig kunt. **Groen** betekent doorrijden. \n\n**Bevoegde Personen:** De bevelen van een bevoegd persoon (politie of verkeersleider) gaan altijd voor op verkeerslichten en verkeersborden.', 
+                    questions: 51 
+                },
+                { 
+                    id: 'F3', 
+                    name: 'Kruisen en inhalen', 
+                    content: 'Inhalen moet altijd links gebeuren. Inhalen is verboden op:\n* Kruispunten (tenzij het om een rotonde gaat of als u op een voorrangsweg rijdt).\n* Op of vlak voor een overweg.\n* Op bruggen, in tunnels, of bij een onoverzichtelijke bocht of top van een helling.', 
+                    questions: 74 
+                },
             ]},
             { id: 'I', title: 'I. Diverse bepalingen', color: 'bg-pink-100', lessons: [
-                { id: 'I1', name: 'Alcohol, drugs en medicatie', content: 'Wettelijke limieten en de gevolgen van rijden onder invloed. Boetes en sancties.', questions: 37 },
-                { id: 'I2', name: 'Ongevallen en hulpverlening', content: 'Gedrag bij ongevallen, de verplichtingen en de Eerste Hulp Bij Ongevallen (EHBO).', questions: 50 },
+                { 
+                    id: 'I1', 
+                    name: 'Alcohol, drugs en medicatie', 
+                    content: 'Rijden onder invloed van alcohol of drugs is ten strengste verboden en leidt tot zware straffen. De limiet is **0,5 promille alcohol in het bloed** of **0,22 mg/l in de adem** (dit is een zware fout in het examen). Bepaalde medicatie kan de rijvaardigheid beïnvloeden; bestuurders moeten altijd de bijsluiter raadplegen.', 
+                    questions: 37 
+                },
+                { 
+                    id: 'I2', 
+                    name: 'Ongevallen en hulpverlening', 
+                    content: 'Bij een ongeval moet u altijd stoppen, de nodige hulp verlenen (eventueel de hulpdiensten verwittigen) en de plaats van het ongeval beveiligen (alarmlichten, gevarendriehoek). Het is belangrijk om geen sporen uit te wissen en, indien mogelijk, een Europees aanrijdingsformulier in te vullen.', 
+                    questions: 50 
+                },
             ]},
         ];
 
@@ -101,111 +171,320 @@
         // The real exam has 50 questions, 5 of which are 'zware fouten' (serious mistakes).
         // Score: 41/50 required. Each serious mistake costs -5 points.
         const mockQuestions = [
-            // Question 1: Priority (met B1 Bord)
+            // Q1 (F. Voorrang): B1 Bord
             {
                 topic: 'F. Voorrang',
                 text: 'U nadert een kruispunt en ziet het B1 bord (omgekeerde driehoek). Wat moet u doen?',
                 options: ['U heeft voorrang op alle andere voertuigen.', 'U moet voorrang verlenen aan bestuurders die van rechts komen.', 'U moet voorrang verlenen aan bestuurders op de dwarse weg.'],
                 correctAnswer: 2, 
                 serious: false,
-                imageUrl: 'https://storage.googleapis.com/gweb-cloud-storage/gemini/belgian_traffic_signs/b1_yield_sign.png', // <-- AFBEELDING TOEGEVOEGD
+                imageUrl: 'https://placehold.co/500x300/E32636/ffffff?text=B1%20Voorrang%20Verlenen', // Zichtbaar B1 bord
                 explanation: 'Het B1 bord, de omgekeerde driehoek met de rode rand, is het voorrangsbord. Het betekent dat u voorrang moet verlenen aan de bestuurders op de dwarse weg, zowel van links als van rechts.'
             },
-            // Question 2: Serious mistake (Snelheid met C43 Bord)
+            // Q2 (D. Snelheid): Snelheid met C43 Bord (50km/u)
             {
                 topic: 'D. Snelheid',
                 text: 'U rijdt in de bebouwde kom. Wat is de maximumsnelheid hier, tenzij anders aangegeven door een bord?',
                 options: ['30 km/u', '50 km/u', '70 km/u'],
-                correctAnswer: 1, // 50 km/u
+                correctAnswer: 1, 
                 serious: true, 
-                imageUrl: 'https://storage.googleapis.com/gweb-cloud-storage/gemini/belgian_traffic_signs/c43_speed_limit_50.png', // <-- AFBEELDING TOEGEVOEGD
+                imageUrl: 'https://placehold.co/500x300/E32636/ffffff?text=C43%20Snelheidslimiet%2050%20(Ronde)', // Zichtbaar 50km/u bord
                 explanation: 'De algemene maximumsnelheid binnen de bebouwde kom in België is 50 km/u. Overschrijding van de snelheid met meer dan 10 km/u is een ernstige overtreding die zwaar bestraft wordt.'
             },
-            // Question 3: Alcohol
+            // Q3 (I. Alcohol): Limiet
             {
                 topic: 'I. Alcohol',
-                text: 'Wat is het wettelijk alcoholgehalte (adem/bloed) waarbij u in België niet meer mag rijden?',
-                options: ['0.22 mg/l (adem) of 0.5‰ (bloed).', '0.35 mg/l (adem) of 0.8‰ (bloed).', 'Er is geen vaste limiet.'],
-                correctAnswer: 0, 
+                text: 'Wat is de wettelijk toegestane limiet voor alcohol in het bloed?',
+                options: ['0.2 promille.', '0.5 promille.', '0.8 promille.'],
+                correctAnswer: 1, 
                 serious: true,
-                explanation: 'De wettelijke limiet is 0,22 mg/l uitgeademde lucht of 0,5 promille bloed. Boven deze limiet riskeert u een onmiddellijke intrekking van het rijbewijs en zware boetes.'
+                imageUrl: 'https://placehold.co/500x300/1e88e5/ffffff?text=Alcohol%20Limit',
+                explanation: 'De wettelijke limiet voor alcohol in het bloed is 0,5 promille (of 0,22 mg/l uitgeademde lucht). Rijden boven deze limiet is een zware fout.'
             },
-            // Question 4: Parking (met E3 Bord - Stilstaan en Parkeren Verboden)
+            // Q4 (H. Parkeren): E3 Bord
             {
+            
                 topic: 'H. Parkeren en stilstaan', 
                 text: 'Wat is de betekenis van verkeersbord E3 (blauwe cirkel met rode X)?', 
                 options: ['Stilstaan en parkeren is verboden.', 'Alleen parkeren is verboden.', 'Alleen stilstaan is verboden.'],
                 correctAnswer: 0, 
                 serious: true, 
-                imageUrl: 'https://storage.googleapis.com/gweb-cloud-storage/gemini/belgian_traffic_signs/e3_no_stopping_parking.png', // <-- AFBEELDING TOEGEVOEGD
-                explanation: 'Verkeersbord E3 (de rode X op een blauwe cirkel) betekent dat zowel stilstaan als parkeren verboden is. Dit wordt beschouwd als een zware fout in het examen.' 
+                imageUrl: 'https://placehold.co/500x300/0000FF/FF0000?text=E3%20Stilstaan%20en%20Parkeren%20Verboden', // Zichtbaar E3 bord
+                explanation: 'Verkeersbord E3 (de rode X op een blauwe cirkel) betekent dat zowel stilstaan als parkeren verboden is. Dit wordt beschouwd als een zware fout in het examen.'
             },
-            // Question 5: Mandatory check-up before driving
+            // Q5 (C. Voertuig): Voorafgaande controle
             {
                 topic: 'C. Het voertuig',
                 text: 'Welke controle is essentieel voordat u vertrekt?',
                 options: ['De bandenspanning en de vloeistofniveaus.', 'Het bedienen van de radio en GPS.', 'De motor laten warmdraaien voor 10 minuten.'],
                 correctAnswer: 0, 
                 serious: false,
+                imageUrl: 'https://placehold.co/500x300/4CAF50/ffffff?text=Controle%20Vloeistoffen%20&%20Banden',
                 explanation: 'Het is de verantwoordelijkheid van de bestuurder om te zorgen dat het voertuig in veilige staat verkeert. Bandenspanning en vloeistofniveaus (olie, remvloeistof) zijn cruciaal voor de veiligheid.'
             },
-             // Question 6: Overtaking
+            // Q6 (E. Inhalen): Tram inhalen
             {
                 topic: 'E. Inhalen',
                 text: 'Is het toegestaan om een tram in te halen aan de linkerkant?',
                 options: ['Ja, altijd.', 'Nee, trams moeten altijd rechts ingehaald worden.', 'Ja, wanneer de breedte van de rijbaan dit toelaat en de tram stilstaat.'],
                 correctAnswer: 2, 
                 serious: false,
+                imageUrl: 'https://placehold.co/500x300/808080/ffffff?text=Tram%20Inhalen%20Situatie%20(Links)',
                 explanation: 'Een tram moet in principe rechts ingehaald worden. Inhalen aan de linkerkant is echter toegestaan als de breedte van de rijbaan het niet toelaat aan de rechterkant, of als de tram stilstaat om passagiers te laten in- en uitstappen.'
             },
-             // Question 7: Bus lane (Afbeelding van busstrook)
+            // Q7 (A. Weg): Busstrook
             {
                 topic: 'A. De openbare weg',
                 text: 'U rijdt over een busstrook aangeduid met een doorlopende witte lijn. Mag u deze busstrook gebruiken?',
                 options: ['Ja, indien u een bus inhaalt.', 'Nee, nooit, tenzij u een bevoegde wagen bent.', 'Ja, om af te slaan, indien toegestaan door de onderbroken lijn.'],
                 correctAnswer: 1, 
                 serious: true,
-                imageUrl: 'https://storage.googleapis.com/gweb-cloud-storage/gemini/belgian_traffic_signs/bus_lane_marking.png', // <-- AFBEELDING TOEGEVOEGD
+                imageUrl: 'https://placehold.co/500x300/000000/ffcc00?text=Busstrook%20Doorlopende%20Lijn',
                 explanation: 'Een busstrook met een doorlopende witte lijn mag door geen enkele andere weggebruiker gebruikt worden, tenzij u een bevoegd voertuig bent (bijv. politiewagen). Het onnodig betreden van de busstrook is een zware overtreding.'
             },
-             // Question 8: Lights usage
+            // Q8 (C. Voertuig): Dimlichten
             {
                 topic: 'C. Het voertuig',
                 text: 'Wanneer moet u uw dimlichten voeren?',
                 options: ['Alleen als het regent.', 'Vanaf het vallen van de avond tot zonsopgang, of bij verminderde zichtbaarheid.', 'Alleen op de snelweg.'],
                 correctAnswer: 1, 
                 serious: false,
+                imageUrl: 'https://placehold.co/500x300/333333/ffffff?text=Dimlichten%20(Avond)',
                 explanation: 'Dimlichten zijn verplicht in de periode tussen het vallen van de avond en zonsopgang, en op elk moment van de dag wanneer de zichtbaarheid beperkt is (bij mist, regen of sneeuw).'
             },
-             // Question 9: Defensive driving
+            // Q9 (B. Weggebruiker): Defensief rijden
             {
                 topic: 'B. De weggebruikers',
                 text: 'Wat is de beste strategie bij het naderen van een onoverzichtelijk kruispunt?',
                 options: ['Snel doorrijden om de doorstroming te bevorderen.', 'Remmen, vertragen en klaar zijn om te stoppen.', 'Claxonneren om andere bestuurders te waarschuwen.'],
                 correctAnswer: 1, 
                 serious: false,
+                imageUrl: 'https://placehold.co/500x300/795548/ffffff?text=Defensief%20Rijden%20Kruispunt',
                 explanation: 'Defensief rijden betekent altijd anticiperen op gevaar. Bij een onoverzichtelijk kruispunt moet u altijd vertragen en klaar zijn om te remmen voor plotseling opkomend verkeer of voetgangers.'
             },
-             // Question 10: Hazard lights
+            // Q10 (I. Diversen): Alarmlichten
             {
                 topic: 'I. Diversen',
                 text: 'Wanneer mag u de alarmlichten (waarschuwingsknipperlichten) gebruiken?',
                 options: ['Wanneer u geparkeerd staat om boodschappen te doen.', 'Om andere bestuurders te bedanken na een inhaalmanoeuvre.', 'Om andere bestuurders te waarschuwen voor dreigend gevaar of als uw voertuig defect is.'],
                 correctAnswer: 2, 
                 serious: false,
+                imageUrl: 'https://placehold.co/500x300/FF5722/ffffff?text=Alarmlichten%20Gebruik',
                 explanation: 'Alarmlichten dienen uitsluitend om andere weggebruikers te waarschuwen voor een dreigend gevaar of wanneer uw voertuig defect is en een obstakel vormt.'
+            },
+            // Q11 (A. Weg): Rotonde (NIEUW)
+            {
+                topic: 'A. De openbare weg',
+                text: 'Wat is verplicht bij het verlaten van een rotonde?',
+                options: ['Voorrang verlenen aan alle voetgangers.', 'Het gebruik van de richtingaangever (pinker).', 'Claxonneren om andere bestuurders te waarschuwen.'],
+                correctAnswer: 1,
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/3498db/ffffff?text=Rotonde%20Afslag', // Rotonde
+                explanation: 'Volgens de verkeersregels is het gebruik van de richtingaangever (pinker) verplicht bij het verlaten van een rotonde om andere weggebruikers te informeren over uw intenties. '
+            },
+            // Q12 (E. Inhalen): Overweg (NIEUW)
+            {
+                topic: 'E. Inhalen',
+                text: 'Is het toegestaan om een ander voertuig in te halen op een overweg?',
+                options: ['Ja, tenzij de slagbomen gesloten zijn.', 'Nee, inhalen is verboden op en vlak voor een overweg.', 'Ja, zolang er geen tegenliggers zijn.'],
+                correctAnswer: 1,
+                serious: true,
+                imageUrl: 'https://placehold.co/500x300/ff0000/ffffff?text=Overweg%20Verkeersbord', // Overweg
+                explanation: 'Inhalen is absoluut verboden op een overweg, ongeacht of de slagbomen open of dicht zijn. Dit wordt als een zware fout beschouwd. '
+            },
+            // Q13 (B. Weggebruiker): Zebrapad (NIEUW)
+            {
+                topic: 'B. De weggebruikers',
+                text: 'Wie heeft voorrang op een zebrapad waar geen verkeerslichten staan?',
+                options: ['De bestuurder die het zebrapad eerst bereikt.', 'De voetganger die de rijbaan betreedt of op het punt staat dit te doen.', 'Voertuigen op een voorrangsweg.'],
+                correctAnswer: 1,
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/000000/ffffff?text=Zebrapad%20met%20Voetganger', // Zebrapad
+                explanation: 'Voetgangers hebben altijd voorrang op een zebrapad zodra zij de intentie tonen om over te steken of dit al aan het doen zijn. Bestuurders moeten stoppen om hen voorrang te verlenen.'
+            },
+            // Q14 (C. Voertuig): Lading uitsteek (NIEUW)
+            {
+                topic: 'C. Het voertuig',
+                text: 'Hoever mag lading maximaal achter de achteras van uw voertuig uitsteken?',
+                options: ['1 meter.', '3 meter.', '3 meter achter de achteras, maximaal 1 meter achter de auto.'],
+                correctAnswer: 1,
+                serious: true,
+                imageUrl: 'https://placehold.co/500x300/808080/ffffff?text=Lading%20Uitsteek%20(3m)', // Lading
+                explanation: 'Lading mag maximaal 3 meter achter de achteras uitsteken. Als het meer dan 1 meter achter de auto uitsteekt, moet het gemarkeerd worden. Overschrijding van de maximale uitsteeklengte is een zware fout.'
+            },
+             // Q15 (D. Snelheid): Snelheid in tunnel (NIEUW)
+            {
+                topic: 'D. Snelheid',
+                text: 'Wat is de verplichting met betrekking tot snelheid in een tunnel?',
+                options: ['U moet uw snelheid verlagen tot 70 km/u.', 'U moet de aangegeven snelheidslimiet volgen en een veilige afstand bewaren.', 'Er is geen specifieke limiet, maar u moet snel doorrijden.'],
+                correctAnswer: 1,
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/808080/ffffff?text=Tunnel%20Verkeersbord', // Tunnel
+                explanation: 'In tunnels geldt de aangegeven maximumsnelheid. Het is vooral belangrijk om een veilige volgafstand te bewaren, aangezien de remweg in tunnels langer kan aanvoelen. '
+            },
+            // Q16 (F. Voorrang): Oranje Licht (NIEUW)
+            {
+                topic: 'F. Voorrang en verkeerslichten',
+                text: 'Wat moet u doen bij een oranje verkeerslicht?',
+                options: ['Doorrijden om te voorkomen dat u te laat bent.', 'Stoppen, tenzij u de stoplijn niet meer veilig kunt passeren.', 'Versnellen om snel de kruising over te steken.'],
+                correctAnswer: 1,
+                serious: true,
+                imageUrl: 'https://placehold.co/500x300/ff9800/ffffff?text=Oranje%20Verkeerslicht', // Oranje licht
+                explanation: 'Oranje licht betekent dat u moet stoppen, tenzij u niet meer op een veilige manier vóór het licht tot stilstand kunt komen. Doorrijden is een zware fout. '
+            },
+            // Q17 (F. Voorrang): Voorrang van rechts bij T-splitsing (NIEUW)
+            {
+                topic: 'F. Voorrang',
+                text: 'Op een T-splitsing zonder borden, welke bestuurder moet voorrang verlenen?',
+                options: ['De bestuurder die rechtdoor gaat.', 'De bestuurder die van links komt.', 'De bestuurder die van de weg komt die eindigt.'],
+                correctAnswer: 2,
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/000000/ffffff?text=T-splitsing%20Zonder%20Borden', // T-splitsing
+                explanation: 'Op een T-splitsing moet de bestuurder die van de weg komt die eindigt (meestal de korte poot van de T), voorrang verlenen aan de bestuurders die op de doorgaande weg rijden.'
+            },
+            // Q18 (I. Diversen): Gevarendriehoek (NIEUW)
+            {
+                topic: 'I. Ongevallen en hulpverlening',
+                text: 'Wat is de minimale afstand waarop u de gevarendriehoek moet plaatsen op een snelweg?',
+                options: ['30 meter.', '50 meter.', '100 meter.'],
+                correctAnswer: 2,
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/ffcc00/000000?text=Gevarendriehoek', // Gevarendriehoek
+                explanation: 'Op de snelweg moet de gevarendriehoek op minimaal 100 meter afstand van het voertuig geplaatst worden om bestuurders voldoende waarschuwingstijd te geven.'
+            },
+            // Q19 (C. Voertuig): Remschijven (NIEUW)
+            {
+                topic: 'C. Het voertuig',
+                text: 'U voelt de rempedaal trillen bij het remmen. Wat is de meest waarschijnlijke oorzaak?',
+                options: ['Versleten banden.', 'Een defecte schokdemper.', 'Vervormde of kromme remschijven.'],
+                correctAnswer: 2,
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/546E7A/ffffff?text=Trillend%20Rempedaal', // Trillen
+                explanation: 'Trillingen in het rempedaal, vooral bij hogere snelheden, wijzen vaak op vervormde of kromme remschijven. Dit vereist onmiddellijke inspectie.'
+            },
+            // Q20 (F. Voorrang): Groen licht (NIEUW)
+            {
+                topic: 'F. Verkeerslichten en tekens',
+                text: 'U nadert een kruispunt met een groen verkeerslicht. Mag u blindelings doorrijden?',
+                options: ['Ja, groen licht betekent altijd vrije doorgang.', 'Nee, u moet voorrang verlenen aan overstekende voetgangers.', 'Ja, tenzij er een bevoegd persoon het verkeer regelt.'],
+                correctAnswer: 1,
+                serious: true,
+                imageUrl: 'https://placehold.co/500x300/4CAF50/ffffff?text=Groen%20Verkeerslicht', // Groen Licht
+                explanation: 'Groen licht geeft vrije doorgang, maar u moet altijd voorrang verlenen aan overstekende voetgangers op het zebrapad. Dit is een zware fout als u dit niet doet.'
+            },
+            // --- NIEUWE VRAGEN (V21 t/m V30) ---
+            
+            // Q21 (H. Parkeren): 5m van zebrapad (NIEUW)
+            {
+                topic: 'H. Parkeren en stilstaan',
+                text: 'Wat is de minimale afstand die u moet bewaren bij het parkeren voor een zebrapad?',
+                options: ['3 meter.', '5 meter.', '10 meter.'],
+                correctAnswer: 1,
+                serious: true,
+                imageUrl: 'https://placehold.co/500x300/ff9900/ffffff?text=Parkeren%20bij%20Zebrapad%205m', // 5m regel
+                explanation: 'U mag niet stilstaan of parkeren op minder dan 5 meter voor de oversteekplaats voor voetgangers. Dit is een zware fout. '
+            },
+            // Q22 (D. Snelheid): Remafstand bij verdubbeling snelheid (NIEUW)
+            {
+                topic: 'D. Snelheid',
+                text: 'Als u uw snelheid verdubbelt (van 50 naar 100 km/u), hoeveel keer langer wordt de remafstand dan ongeveer?',
+                options: ['2 keer langer.', '3 keer langer.', '4 keer langer.'],
+                correctAnswer: 2,
+                serious: true,
+                imageUrl: 'https://placehold.co/500x300/8c4dff/ffffff?text=Remafstand%20Formule%20(x4)', // Remafstand formule
+                explanation: 'De remafstand is kwadratisch afhankelijk van de snelheid (V²). Als u de snelheid verdubbelt, verviervoudigt de remafstand (2² = 4). [Image of remweg formule]'
+            },
+            // Q23 (F. Voorrang): Gele knipperlichten (NIEUW)
+            {
+                topic: 'F. Verkeerslichten en tekens',
+                text: 'Wat betekent een geel knipperlicht op een kruispunt?',
+                options: ['U moet stoppen en wachten op het groene licht.', 'U mag doorrijden, maar u moet extra voorzichtig zijn en de voorrangsregels respecteren.', 'U moet voorrang verlenen aan voertuigen van rechts.'],
+                correctAnswer: 1,
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/fdd835/000000?text=Geel%20Knipperlicht', // Geel knipperlicht
+                explanation: 'Een geel knipperlicht betekent dat de verkeerslichten buiten werking zijn. U moet de algemene voorrangsregels (voorrang van rechts, borden) toepassen en extra voorzichtig zijn.'
+            },
+            // Q24 (E. Inhalen): Inhalen van een fietser buiten de bebouwde kom (NIEUW)
+            {
+                topic: 'E. Inhalen',
+                text: 'Wat is de minimale zijdelingse afstand die u moet bewaren bij het inhalen van een fietser buiten de bebouwde kom?',
+                options: ['50 cm.', '1 meter.', '1,5 meter.'],
+                correctAnswer: 2,
+                serious: true,
+                imageUrl: 'https://placehold.co/500x300/03a9f4/ffffff?text=1%2C5m%20Inhaalafstand%20Fietser', // 1.5m
+                explanation: 'Bij het inhalen van fietsers en voetgangers moet u buiten de bebouwde kom minimaal 1,5 meter afstand bewaren. Binnen de bebouwde kom is dit 1 meter. Dit is een zware fout.'
+            },
+            // Q25 (B. Weggebruiker): Gordelplicht kinderen (NIEUW)
+            {
+                topic: 'B. De weggebruikers',
+                text: 'Vanaf welke lengte mag een kind in de auto zonder kinderzitje vervoerd worden?',
+                options: ['Vanaf 1,25 meter.', 'Vanaf 1,35 meter.', 'Vanaf 1,50 meter.'],
+                correctAnswer: 1,
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/607d8b/ffffff?text=135cm%20Regel%20Kind', // 135cm
+                explanation: 'Kinderen die kleiner zijn dan 1,35 meter moeten in een passend kinderzitje worden vervoerd. Vanaf 1,35 meter is de normale veiligheidsgordel toegestaan.'
+            },
+            // Q26 (C. Voertuig): Mistlichten achter (NIEUW)
+            {
+                topic: 'C. Het voertuig',
+                text: 'Wanneer mag u het mistachterlicht gebruiken?',
+                options: ['Alleen bij zware regenval.', 'Bij mist of sneeuwval waardoor de zichtbaarheid minder dan 100 meter is.', 'Altijd als het donker is.'],
+                correctAnswer: 1,
+                serious: true,
+                imageUrl: 'https://placehold.co/500x300/ff5722/ffffff?text=Mist%20Lichten%20Achter%20(<100m)', // Mistlichten
+                explanation: 'Het mistachterlicht mag uitsluitend worden gebruikt bij mist of sneeuwval waardoor het zicht minder dan 100 meter bedraagt. Bij zware regen mag u alleen de gewone achterlichten gebruiken. Dit is een zware fout.'
+            },
+            // Q27 (A. Weg): Pechstrook (NIEUW)
+            {
+                topic: 'A. De openbare weg',
+                text: 'Wanneer mag u over de pechstrook rijden op de snelweg?',
+                options: ['Bij zware file om de afrit te bereiken.', 'Alleen in geval van nood (panne of ongeval).', 'Als dit is aangegeven door de signalisatie (Groene Pijl).'],
+                correctAnswer: 1,
+                serious: true,
+                imageUrl: 'https://placehold.co/500x300/ffcc00/ffffff?text=Pechstrook%20Noodgeval', // Pechstrook
+                explanation: 'De pechstrook is uitsluitend voor noodgevallen (panne, ongeval, ziekte). Rijdend verkeer (zelfs bij file) is er verboden, tenzij anders aangegeven door een dynamisch verkeersbord. '
+            },
+            // Q28 (I. Diversen): Gevarendriehoek bij ongeval (NIEUW)
+            {
+                topic: 'I. Ongevallen en hulpverlening',
+                text: 'Binnen de bebouwde kom, op welke afstand plaatst u de gevarendriehoek bij een ongeval?',
+                options: ['30 meter.', '50 meter.', '100 meter.'],
+                correctAnswer: 2,
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/ffeb3b/000000?text=30m%20Gevarendriehoek', // 30m
+                explanation: 'Binnen de bebouwde kom moet de gevarendriehoek op 30 meter afstand geplaatst worden, tenzij dit niet mogelijk is. Op de snelweg is dit 100 meter. '
+            },
+            // Q29 (H. Parkeren): Parkeerverbod (NIEUW)
+            {
+                topic: 'H. Parkeren en stilstaan',
+                text: 'Mag u uw voertuig stilstaan (niet parkeren) op een plek waar een E1 bord (parkeerverbod) staat?',
+                options: ['Ja, stilstaan is toegestaan.', 'Nee, stilstaan en parkeren is verboden.', 'Alleen om iemand te laten in- of uitstappen.'],
+                correctAnswer: 0,
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/ff0000/ffffff?text=E1%20Parkeerverbod', // E1 Bord
+                explanation: 'Verkeersbord E1 verbiedt alleen parkeren (langer dan nodig voor in- of uitstappen of laden/lossen). Stilstaan is dus in principe toegestaan, tenzij de verkeersregels dit ook verbieden (bijv. op een zebrapad).'
+            },
+             // Q30 (F. Voorrang): Teken van de politie (NIEUW)
+            {
+                topic: 'F. Voorrang en verkeerslichten',
+                text: 'U nadert een kruispunt. De verkeerslichten staan op groen, maar een politieagent gebaart dat u moet stoppen. Wat moet u doen?',
+                options: ['De agent negeren, want het licht staat op groen.', 'Stoppen, want de aanwijzingen van een bevoegd persoon gaan voor.', 'Doorrijden, maar langzaam.'],
+                correctAnswer: 1,
+                serious: true,
+                imageUrl: 'https://placehold.co/500x300/0000ff/ffffff?text=Agent%20Gebaar%20(Stoppen)', // Gebaar
+                explanation: 'De aanwijzingen van een bevoegd persoon (politie of verkeersleider) gaan altijd voor op verkeerslichten en verkeersborden. Het negeren hiervan is een zware fout.'
             },
         ];
         
         // Pad the question bank to 50 questions (for the exam simulation)
-        // In een echte app zou je hier een database van 800+ unieke vragen laden.
+        // Use modulo 30 to cycle through the 30 unique questions
         for (let i = mockQuestions.length; i < 50; i++) {
-            const baseQuestion = mockQuestions[i % 10];
+            const baseQuestion = mockQuestions[i % 30]; 
             const explanationText = baseQuestion.explanation || 'Geen specifieke uitleg beschikbaar voor deze oefenvraag.';
             
             mockQuestions.push({
                 ...baseQuestion,
-                text: baseQuestion.text.replace(`(Vraag ${i % 10 + 1}/50)`, '') + ` (Vraag ${i + 1}/50)`,
+                text: baseQuestion.text.replace(`(Vraag ${i % 30 + 1}/50)`, '') + ` (Vraag ${i + 1}/50)`,
                 serious: (i % 5 === 0) ? true : false, 
                 explanation: explanationText
             });
@@ -218,6 +497,8 @@
         let examAnswers = new Array(50).fill(null); 
         let isExamFinished = false;
         let isAnswerSubmitted = false; 
+        let currentQuizQuestions = []; // Nieuwe state voor de gefilterde quiz
+        let isLessonQuiz = false; // Nieuwe flag om quiztype te bepalen
 
         // --- UTILITY FUNCTIONS ---
         const $ = (id) => document.getElementById(id);
@@ -227,6 +508,7 @@
             currentLessonId = null; 
             isExamFinished = false;
             isAnswerSubmitted = false; 
+            isLessonQuiz = false; // Reset quiz type
             
             // Update button styles
             const studyBtn = $('study-btn');
@@ -301,57 +583,90 @@
                     <h2 class="text-3xl font-bold text-gray-900 mb-2">${lesson.name}</h2>
                     <p class="text-md text-gray-600 mb-6">${parent.title}</p>
                     
-                    <!-- Placeholder Content Warning -->
-                    <div class="bg-yellow-50 border-l-4 border-yellow-500 text-yellow-800 p-4 mb-6 rounded">
-                        <p class="font-semibold">Informatie Placeholder:</p>
-                        <p class="text-sm">Dit is een tijdelijke tekst. In de definitieve app moet hier de volledige theorie over: *${lesson.name}* komen uit de officiële Wegcode.</p>
-                    </div>
+                    <!-- Placeholder Content Warning (Removed since content is now filled) -->
 
                     <p class="text-lg text-gray-700 leading-relaxed">${lesson.content}</p>
 
                     <div class="mt-8 pt-4 border-t">
                         <h3 class="text-xl font-bold text-gray-800 mb-4">Oefenvragen (${lesson.questions} beschikbaar)</h3>
-                        <p class="text-gray-600">Start hier met het oefenen van de ${lesson.questions} vragen die bij dit hoofdstuk horen. (In de volledige app zullen de vragen hier getoond worden.)</p>
-                        <button class="mt-4 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-200 shadow-md">Start Vragen</button>
+                        <p class="text-gray-600">Start hier met het oefenen van de ${lesson.questions} vragen die bij dit hoofdstuk horen.</p>
+                        <button onclick="startLessonQuiz('${lesson.id}')" class="mt-4 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-200 shadow-md">Start Vragen</button>
                     </div>
                 </div>
             `;
             $('content-area').innerHTML = html;
         }
 
-
-        // --- EXAM MODE LOGIC ---
-
-        function startExam() {
-            // Reset state for a new exam
-            examAnswers = new Array(50).fill(null);
+        // --- LESSON QUIZ SETUP ---
+        function startLessonQuiz(lessonId) {
+            currentLessonId = lessonId;
+            isLessonQuiz = true;
             currentQuestionIndex = 0;
+            isAnswerSubmitted = false;
             isExamFinished = false;
-            isAnswerSubmitted = false; 
-            renderExamView();
+            
+            // Filter vragen op basis van het hoofdthema (eerste letter van de lessonId)
+            const mainTopicLetter = lessonId.charAt(0);
+            currentQuizQuestions = mockQuestions.filter(q => q.topic.startsWith(mainTopicLetter + '.'));
+            
+            // Als er geen vragen zijn, toon een melding
+            if (currentQuizQuestions.length === 0) {
+                alert('Er zijn nog geen vragen beschikbaar voor dit hoofdstuk.');
+                setMode('study'); // Terug naar studiemodus
+                return;
+            }
+
+            // Maak een antwoorden-array die even groot is als het aantal gefilterde vragen
+            examAnswers = new Array(currentQuizQuestions.length).fill(null);
+            
+            renderQuizView(); // Start de quiz-weergave
         }
 
-        function renderExamView() {
+
+        // --- FULL EXAM SETUP ---
+        function startExam() {
+            // Reset state for a new full exam
+            isLessonQuiz = false;
+            currentQuizQuestions = mockQuestions; // Gebruik de volledige set
+            currentQuestionIndex = 0;
+            isAnswerSubmitted = false;
+            isExamFinished = false;
+            examAnswers = new Array(50).fill(null); 
+            
+            renderQuizView(); // Start de quiz-weergave
+        }
+
+        // --- VERSATILE QUIZ RENDERING (Vervangt renderExamView) ---
+        function renderQuizView() {
             const contentArea = $('content-area');
             contentArea.innerHTML = '';
             
+            const quizSet = isLessonQuiz ? currentQuizQuestions : mockQuestions;
+            const totalQuestions = quizSet.length;
+            
             if (isExamFinished) {
-                return calculateAndShowResults();
+                // Roep de resultatenfunctie op met de juiste vragen set
+                return calculateAndShowResults(quizSet);
             }
 
-            const q = mockQuestions[currentQuestionIndex];
+            const q = quizSet[currentQuestionIndex];
             const userAnswerIndex = examAnswers[currentQuestionIndex];
             const isCorrect = userAnswerIndex === q.correctAnswer;
+            
+            // Titel voor de quiz
+            const quizTitle = isLessonQuiz ? `Oefenquiz: ${q.topic.split('.')[0]}. ${curriculum.find(c => c.id === q.topic.split('.')[0]).title}` : 'Proefexamen (50 Vragen)';
 
             // Progress Tracker
-            let progressHtml = '<div class="flex flex-wrap justify-start gap-1 mb-6 p-2 bg-gray-50 rounded-lg shadow-inner">';
-            for (let i = 0; i < 50; i++) {
+            let progressHtml = `<div class="text-xl font-bold mb-4 text-gray-800">${quizTitle}</div>`;
+            progressHtml += '<div class="flex flex-wrap justify-start gap-1 mb-6 p-2 bg-gray-50 rounded-lg shadow-inner">';
+            for (let i = 0; i < totalQuestions; i++) {
                 const isCurrent = i === currentQuestionIndex;
                 const isAnswered = examAnswers[i] !== null;
                 let bgColor = 'bg-gray-300';
                 if (isCurrent) bgColor = 'bg-blue-600 text-white font-bold shadow-md';
                 else if (isAnswered) bgColor = 'bg-green-300';
                 
+                // Gebruik renderQuizView i.p.v. goToQuestion om de state te behouden
                 progressHtml += `<button onclick="goToQuestion(${i})" class="w-8 h-8 flex items-center justify-center text-xs rounded-md ${bgColor} hover:opacity-75 transition duration-150">${i + 1}</button>`;
             }
             progressHtml += '</div>';
@@ -375,7 +690,7 @@
             questionHtml += `
                 <div class="mb-4">
                     <span class="text-sm font-semibold text-gray-600">${q.topic}</span>
-                    <h3 class="text-xl md:text-2xl font-bold text-gray-800 mt-1">${currentQuestionIndex + 1} van 50: ${q.text}</h3>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-800 mt-1">${currentQuestionIndex + 1} van ${totalQuestions}: ${q.text}</h3>
                     ${q.serious ? '<p class="text-sm text-red-600 font-semibold mt-1">Dit is een zware fout (kost -5 punten indien fout)!</p>' : ''}
                 </div>
                 
@@ -406,7 +721,7 @@
                 }
 
                 questionHtml += `
-                    <button onclick="${onClickAction}" 
+                    <button id="option-${index}" onclick="${onClickAction}" 
                             class="w-full text-left p-4 border-2 rounded-lg transition duration-200 shadow ${optionClass} ${isAnswerSubmitted ? 'cursor-default' : ''}">
                         <span class="font-semibold mr-3">${String.fromCharCode(65 + index)}.</span> ${option}
                     </button>
@@ -436,12 +751,12 @@
                         Vorige
                     </button>
                     ${isAnswerSubmitted ? // Show 'Volgende' only after feedback is given
-                        currentQuestionIndex < 49 ? `
+                        currentQuestionIndex < totalQuestions - 1 ? `
                         <button onclick="nextQuestion()" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200 shadow-md">
                             Volgende
                         </button>`
                         : `<button onclick="finishExamConfirmation()" class="px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition duration-200 shadow-md">
-                            Examen Beëindigen
+                            Quiz Beëindigen
                         </button>`
                     : // If answer not submitted, disable forward navigation to prevent skipping
                         `<button class="px-6 py-3 bg-gray-300 text-gray-700 font-semibold rounded-lg cursor-not-allowed shadow-md">
@@ -459,20 +774,21 @@
             
             examAnswers[currentQuestionIndex] = answerIndex;
             isAnswerSubmitted = true; // Enter feedback mode
-            renderExamView(); 
+            renderQuizView(); 
         }
 
         function goToQuestion(index) {
             currentQuestionIndex = index;
             isAnswerSubmitted = examAnswers[index] !== null; // Show feedback if already answered
-            renderExamView();
+            renderQuizView();
         }
 
         function nextQuestion() {
-            if (currentQuestionIndex < 49) {
+            const totalQuestions = isLessonQuiz ? currentQuizQuestions.length : mockQuestions.length;
+            if (currentQuestionIndex < totalQuestions - 1) {
                 currentQuestionIndex++;
                 isAnswerSubmitted = examAnswers[currentQuestionIndex] !== null;
-                renderExamView();
+                renderQuizView();
             }
         }
 
@@ -480,81 +796,123 @@
             if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
                 isAnswerSubmitted = examAnswers[currentQuestionIndex] !== null;
-                renderExamView();
+                renderQuizView();
             }
         }
 
         function finishExamConfirmation() {
+            const quizSet = isLessonQuiz ? currentQuizQuestions : mockQuestions;
             const unanswered = examAnswers.filter(a => a === null).length;
+
             if (unanswered > 0) {
-                 showModal('Let op!', `Je hebt nog ${unanswered} vragen onbeantwoord. Wil je het examen toch beëindigen?`, true, calculateAndShowResults);
+                 showModal('Let op!', `Je hebt nog ${unanswered} vragen onbeantwoord in deze quiz. Wil je de quiz toch beëindigen?`, true, () => calculateAndShowResults(quizSet));
             } else {
-                calculateAndShowResults();
+                calculateAndShowResults(quizSet);
             }
         }
         
-        // --- RESULT CALCULATION (No change in logic, only structure updated) ---
+        // --- RESULT CALCULATION (Nu met de te gebruiken vragen set als parameter) ---
 
-        function calculateAndShowResults() {
+        function calculateAndShowResults(questionsSet) {
             isExamFinished = true;
-            let totalScore = 50; // Start with 50 points, 1 point per correct answer if not a serious mistake
+            let totalScore = 0; // Begin bij 0, elke correcte is +1 of +5 (voor zware fouten)
+            let maxScore = questionsSet.length;
             let correctCount = 0;
             let seriousMistakesCount = 0;
+            
+            // Voor de lesquiz tellen we elke vraag als 1 punt, tenzij het een zware fout is (dan is het 5)
+            // Het pass-criterium van 41/50 is alleen van toepassing op het volledige Proefexamen.
 
-            mockQuestions.forEach((q, index) => {
+            questionsSet.forEach((q, index) => {
                 const userAnswer = examAnswers[index];
                 const isCorrect = userAnswer === q.correctAnswer;
-
-                if (isCorrect) {
-                    correctCount++;
-                } else if (q.serious && !isCorrect) {
-                    // Serious mistake (fout op zware fout): -5 points
-                    totalScore -= 5;
-                    seriousMistakesCount++;
-                } else if (!q.serious && !isCorrect) {
-                    // Simple mistake: -1 point
-                    totalScore -= 1;
+                
+                if (isLessonQuiz) {
+                    // In lesquiz modus telt elke vraag als 1 punt (of 5 voor zware fouten)
+                    // We tellen correcte antwoorden voor de statistieken
+                    if (isCorrect) {
+                        correctCount++;
+                    } else if (q.serious && !isCorrect) {
+                        seriousMistakesCount++;
+                    }
+                } else {
+                    // Volledig examen (50 vragen, start op 50 punten)
+                    if (isCorrect) {
+                        correctCount++;
+                    } else if (q.serious && !isCorrect) {
+                        totalScore -= 5;
+                        seriousMistakesCount++;
+                    } else if (!q.serious && !isCorrect) {
+                        totalScore -= 1;
+                    }
                 }
             });
-            
-            // The actual passing score is 41/50, but we need to check the serious faults rule (max 2 serious faults allowed)
-            const passedScore = totalScore >= 41;
-            const passedSeriousFaults = seriousMistakesCount <= 5; // Making 6 serious errors (30 points loss) means you can only score 20, which is a fail.
-            const passed = passedScore && passedSeriousFaults;
 
-            // Render result view
-            const contentArea = $('content-area');
-            let resultHtml = `
+            let finalScoreText;
+            let passOrFailClass = '';
+
+            if (isLessonQuiz) {
+                finalScoreText = `${correctCount} van de ${questionsSet.length} vragen correct.`;
+                passOrFailClass = correctCount >= questionsSet.length * 0.8 ? 'text-green-600' : 'text-red-600';
+            } else {
+                // Herbereken de score voor het echte examen: Begin op 50 en trek de fouten af
+                let examScore = 50;
+                questionsSet.forEach((q, index) => {
+                    const isCorrect = examAnswers[index] === q.correctAnswer;
+                    if (!isCorrect) {
+                        examScore -= (q.serious ? 5 : 1);
+                    }
+                });
+                
+                const passed = examScore >= 41 && seriousMistakesCount <= 5;
+                finalScoreText = `Eindscore: ${examScore}/50.`;
+                passOrFailClass = passed ? 'text-green-600' : 'text-red-600';
+                
+                // Pas de resultaten-UI aan om de score en de 41/50 regel te tonen
+                const resultHtml = renderResultUI(passed, examScore, 50, correctCount, seriousMistakesCount, questionsSet, passed);
+                $('content-area').innerHTML = resultHtml;
+                // Optioneel modal tonen, maar nu tonen we de UI direct
+                return; 
+            }
+
+            // Render de resultaten UI voor beide modi
+            const resultHtml = renderResultUI(passOrFailClass.includes('green'), finalScoreText, questionsSet.length, correctCount, seriousMistakesCount, questionsSet, isLessonQuiz);
+            $('content-area').innerHTML = resultHtml;
+        }
+        
+        // --- FUNCTIE OM RESULTATEN UI TE GENEREREN ---
+        function renderResultUI(passed, scoreDisplay, totalQuestions, correctCount, seriousMistakesCount, questionsSet, isLessonQuiz) {
+             let html = `
                 <h2 class="text-3xl font-bold mb-4 text-center ${passed ? 'text-green-600' : 'text-red-600'}">
                     ${passed ? 'Geslaagd! 🎉' : 'Niet Geslaagd 😔'}
                 </h2>
                 <div class="grid grid-cols-2 gap-4 text-lg mb-6">
-                    <div class="bg-blue-50 p-4 rounded-lg">
-                        <p class="font-semibold text-gray-700">Behaalde Score:</p>
-                        <p class="text-3xl font-bold text-blue-700">${totalScore}/50</p>
+                    <div class="bg-blue-50 p-4 rounded-lg col-span-2 text-center">
+                        <p class="font-semibold text-gray-700">${isLessonQuiz ? 'Quiz Resultaat' : 'Examen Eindscore'}:</p>
+                        <p class="text-3xl font-bold text-blue-700">${isLessonQuiz ? correctCount + '/' + totalQuestions : scoreDisplay}</p>
                     </div>
                     <div class="bg-green-50 p-4 rounded-lg">
                         <p class="font-semibold text-gray-700">Correcte Antwoorden:</p>
-                        <p class="text-3xl font-bold text-green-700">${correctCount}/50</p>
+                        <p class="text-3xl font-bold text-green-700">${correctCount}/${totalQuestions}</p>
                     </div>
-                </div>
-                <div class="bg-red-50 p-4 rounded-lg mb-8">
-                    <p class="font-semibold text-gray-700">Aantal Zware Fouten:</p>
-                    <p class="text-3xl font-bold text-red-700">${seriousMistakesCount} (Max 5 toegelaten)</p>
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <p class="font-semibold text-gray-700">Zware Fouten:</p>
+                        <p class="text-3xl font-bold text-red-700">${seriousMistakesCount} ${isLessonQuiz ? '' : '(Max 5 toegelaten)'}</p>
+                    </div>
                 </div>
 
                 <h3 class="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">Overzicht van uw antwoorden</h3>
                 <div class="space-y-2">
             `;
 
-            mockQuestions.forEach((q, index) => {
+            questionsSet.forEach((q, index) => {
                 const userAnswer = examAnswers[index];
                 const isCorrect = userAnswer === q.correctAnswer;
                 const correctOptionText = q.options[q.correctAnswer];
                 const userOptionText = userAnswer !== null ? q.options[userAnswer] : 'Niet beantwoord';
                 const bgColor = isCorrect ? 'success-bg' : 'error-bg';
 
-                resultHtml += `
+                html += `
                     <div class="${bgColor} p-3 rounded-lg border-l-4 ${isCorrect ? 'border-green-500' : 'border-red-500'}">
                         <p class="font-bold">Vraag ${index + 1}: ${q.text}</p>
                         ${q.imageUrl ? `<img src="${q.imageUrl}" alt="Verkeerssituatie of Verkeersbord" class="mt-2 mb-2 max-w-full md:max-w-xs h-auto rounded border border-gray-400"/>` : ''}
@@ -564,19 +922,17 @@
                     </div>
                 `;
             });
-
-            resultHtml += `</div>
-                <div class="flex justify-center mt-8 pt-4 border-t">
-                    <button onclick="startExam()" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200 shadow-lg">Opnieuw Proefexamen</button>
+            
+             html += `</div>
+                <div class="flex justify-center mt-8 pt-4 border-t space-x-4">
+                    <button onclick="currentLessonId = null; setMode('study')" class="px-6 py-3 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-700 transition duration-200 shadow-lg">Terug naar Studiemodus</button>
+                    ${!isLessonQuiz ? `<button onclick="startExam()" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200 shadow-lg">Opnieuw Proefexamen</button>` : ''}
                 </div>
             `;
-            
-            contentArea.innerHTML = resultHtml;
-            // Optionally, show results in a modal too
-            showModal('Examen Resultaat', `Je hebt een score van ${totalScore}/50 behaald en ${passedSeriousFaults ? 'voldoet' : 'voldoet niet'} aan de zware fouten regel. ${passed ? 'Gefeliciteerd!' : 'Oefen nog even verder.'}`, false);
+            return html;
         }
 
-        // --- MODAL UTILITIES ---
+        // --- MODAL UTILITIES (Geen Verandering) ---
 
         function showModal(title, body, confirm = false, onConfirm = null) {
             $('modal-title').textContent = title;
