@@ -102,15 +102,15 @@
         // Score: 41/50 required. Each serious mistake costs -5 points.
         const mockQuestions = [
             // Question 1: Priority (with B1 Priority sign) - Corrected to B1 rule (Give Way)
-            {
-                topic: 'F. Voorrang',
-                text: 'U nadert een kruispunt en ziet het B1 bord (omgekeerde driehoek). Wat moet u doen?',
-                options: ['U heeft voorrang op alle andere voertuigen.', 'U moet voorrang verlenen aan bestuurders die van rechts komen.', 'U moet voorrang verlenen aan bestuurders op de dwarse weg.'],
-                correctAnswer: 2, // You must yield to traffic on the crossing road (Give Way)
-                serious: false,
-                imageUrl: 'https://placehold.co/500x300/E32636/ffffff?text=B1%20Voorrang+verlenen%20(Omgekeerde%20Driehoek)',
-                explanation: 'Het B1 bord, de omgekeerde driehoek met de rode rand, is het voorrangsbord. Het betekent dat u voorrang moet verlenen aan de bestuurders op de dwarse weg, zowel van links als van rechts.'
-            },
+         {
+    topic: 'F. Voorrang',
+    text: 'U nadert een kruispunt en ziet het B1 bord (omgekeerde driehoek). Wat moet u doen?',
+    options: ['U heeft voorrang op alle andere voertuigen.', 'U moet voorrang verlenen aan bestuurders die van rechts komen.', 'U moet voorrang verlenen aan bestuurders op de dwarse weg.'],
+    correctAnswer: 2, 
+    serious: false,
+    imageUrl: 'https://jouw-afbeeldingen-host.com/bord-b1-voorrang.jpg', // <-- HIER KOMT UW ECHTE LINK
+    explanation: 'Het B1 bord, de omgekeerde driehoek met de rode rand, is het voorrangsbord...'
+},
             // Question 2: Serious mistake (Speed limit) (with C43 sign)
             {
                 topic: 'D. Snelheid',
@@ -610,4 +610,5 @@
 
     </script>
 </body>
+
 </html>
