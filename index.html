@@ -101,24 +101,24 @@
         // The real exam has 50 questions, 5 of which are 'zware fouten' (serious mistakes).
         // Score: 41/50 required. Each serious mistake costs -5 points.
         const mockQuestions = [
-            // Question 1: Priority (with B1 Priority sign) - Corrected to B1 rule (Give Way)
-         {
-    topic: 'F. Voorrang',
-    text: 'U nadert een kruispunt en ziet het B1 bord (omgekeerde driehoek). Wat moet u doen?',
-    options: ['U heeft voorrang op alle andere voertuigen.', 'U moet voorrang verlenen aan bestuurders die van rechts komen.', 'U moet voorrang verlenen aan bestuurders op de dwarse weg.'],
-    correctAnswer: 2, 
-    serious: false,
-    imageUrl: 'https://jouw-afbeeldingen-host.com/bord-b1-voorrang.jpg', // <-- HIER KOMT UW ECHTE LINK
-    explanation: 'Het B1 bord, de omgekeerde driehoek met de rode rand, is het voorrangsbord...'
-},
-            // Question 2: Serious mistake (Speed limit) (with C43 sign)
+            // Question 1: Priority (met B1 Bord)
+            {
+                topic: 'F. Voorrang',
+                text: 'U nadert een kruispunt en ziet het B1 bord (omgekeerde driehoek). Wat moet u doen?',
+                options: ['U heeft voorrang op alle andere voertuigen.', 'U moet voorrang verlenen aan bestuurders die van rechts komen.', 'U moet voorrang verlenen aan bestuurders op de dwarse weg.'],
+                correctAnswer: 2, 
+                serious: false,
+                imageUrl: 'https://storage.googleapis.com/gweb-cloud-storage/gemini/belgian_traffic_signs/b1_yield_sign.png', // <-- AFBEELDING TOEGEVOEGD
+                explanation: 'Het B1 bord, de omgekeerde driehoek met de rode rand, is het voorrangsbord. Het betekent dat u voorrang moet verlenen aan de bestuurders op de dwarse weg, zowel van links als van rechts.'
+            },
+            // Question 2: Serious mistake (Snelheid met C43 Bord)
             {
                 topic: 'D. Snelheid',
                 text: 'U rijdt in de bebouwde kom. Wat is de maximumsnelheid hier, tenzij anders aangegeven door een bord?',
                 options: ['30 km/u', '50 km/u', '70 km/u'],
                 correctAnswer: 1, // 50 km/u
-                serious: true, // Costs 5 points if wrong
-                imageUrl: 'https://placehold.co/500x300/E32636/ffffff?text=C43%20Snelheidslimiet%2050%20(Rode%20Rand)',
+                serious: true, 
+                imageUrl: 'https://storage.googleapis.com/gweb-cloud-storage/gemini/belgian_traffic_signs/c43_speed_limit_50.png', // <-- AFBEELDING TOEGEVOEGD
                 explanation: 'De algemene maximumsnelheid binnen de bebouwde kom in België is 50 km/u. Overschrijding van de snelheid met meer dan 10 km/u is een ernstige overtreding die zwaar bestraft wordt.'
             },
             // Question 3: Alcohol
@@ -126,26 +126,26 @@
                 topic: 'I. Alcohol',
                 text: 'Wat is het wettelijk alcoholgehalte (adem/bloed) waarbij u in België niet meer mag rijden?',
                 options: ['0.22 mg/l (adem) of 0.5‰ (bloed).', '0.35 mg/l (adem) of 0.8‰ (bloed).', 'Er is geen vaste limiet.'],
-                correctAnswer: 0, // 0.22 mg/l or 0.5‰
+                correctAnswer: 0, 
                 serious: true,
                 explanation: 'De wettelijke limiet is 0,22 mg/l uitgeademde lucht of 0,5 promille bloed. Boven deze limiet riskeert u een onmiddellijke intrekking van het rijbewijs en zware boetes.'
             },
-            // Question 4: Parking (with E1 Parking prohibited sign)
+            // Question 4: Parking (met E3 Bord - Stilstaan en Parkeren Verboden)
             {
-                topic: 'H. Parkeren',
-                text: 'U ziet dit verkeersbord. Mag u hier parkeren?',
-                options: ['Ja, tenzij het bord anders aangeeft.', 'Nee, dit is verboden.', 'Ja, maar enkel op weekdagen.'],
-                correctAnswer: 1, // No, forbidden
-                serious: false,
-                imageUrl: 'https://placehold.co/500x300/E32636/ffffff?text=E1%20Verboden%20te%20parkeren%20(Rode%20lijn)',
-                explanation: 'Het E1 bord (rode streep op blauwe achtergrond) betekent dat u hier niet mag parkeren. U mag hier wel stilstaan om iemand te laten in- of uitstappen, of om te laden en lossen.'
+                topic: 'H. Parkeren en stilstaan', 
+                text: 'Wat is de betekenis van verkeersbord E3 (blauwe cirkel met rode X)?', 
+                options: ['Stilstaan en parkeren is verboden.', 'Alleen parkeren is verboden.', 'Alleen stilstaan is verboden.'],
+                correctAnswer: 0, 
+                serious: true, 
+                imageUrl: 'https://storage.googleapis.com/gweb-cloud-storage/gemini/belgian_traffic_signs/e3_no_stopping_parking.png', // <-- AFBEELDING TOEGEVOEGD
+                explanation: 'Verkeersbord E3 (de rode X op een blauwe cirkel) betekent dat zowel stilstaan als parkeren verboden is. Dit wordt beschouwd als een zware fout in het examen.' 
             },
             // Question 5: Mandatory check-up before driving
             {
                 topic: 'C. Het voertuig',
                 text: 'Welke controle is essentieel voordat u vertrekt?',
                 options: ['De bandenspanning en de vloeistofniveaus.', 'Het bedienen van de radio en GPS.', 'De motor laten warmdraaien voor 10 minuten.'],
-                correctAnswer: 0, // Bandenspanning and levels
+                correctAnswer: 0, 
                 serious: false,
                 explanation: 'Het is de verantwoordelijkheid van de bestuurder om te zorgen dat het voertuig in veilige staat verkeert. Bandenspanning en vloeistofniveaus (olie, remvloeistof) zijn cruciaal voor de veiligheid.'
             },
@@ -154,18 +154,18 @@
                 topic: 'E. Inhalen',
                 text: 'Is het toegestaan om een tram in te halen aan de linkerkant?',
                 options: ['Ja, altijd.', 'Nee, trams moeten altijd rechts ingehaald worden.', 'Ja, wanneer de breedte van de rijbaan dit toelaat en de tram stilstaat.'],
-                correctAnswer: 2, // Ja, when possible and tram is stationary
+                correctAnswer: 2, 
                 serious: false,
                 explanation: 'Een tram moet in principe rechts ingehaald worden. Inhalen aan de linkerkant is echter toegestaan als de breedte van de rijbaan het niet toelaat aan de rechterkant, of als de tram stilstaat om passagiers te laten in- en uitstappen.'
             },
-             // Question 7: Bus lane (Image of bus lane marking)
+             // Question 7: Bus lane (Afbeelding van busstrook)
             {
                 topic: 'A. De openbare weg',
                 text: 'U rijdt over een busstrook aangeduid met een doorlopende witte lijn. Mag u deze busstrook gebruiken?',
                 options: ['Ja, indien u een bus inhaalt.', 'Nee, nooit, tenzij u een bevoegde wagen bent.', 'Ja, om af te slaan, indien toegestaan door de onderbroken lijn.'],
-                correctAnswer: 1, // Nee, nooit, tenzij u een bevoegde wagen bent.
+                correctAnswer: 1, 
                 serious: true,
-                imageUrl: 'https://placehold.co/500x300/A0A0A0/000000?text=Busstrook+met+doorlopende+witte+lijn',
+                imageUrl: 'https://storage.googleapis.com/gweb-cloud-storage/gemini/belgian_traffic_signs/bus_lane_marking.png', // <-- AFBEELDING TOEGEVOEGD
                 explanation: 'Een busstrook met een doorlopende witte lijn mag door geen enkele andere weggebruiker gebruikt worden, tenzij u een bevoegd voertuig bent (bijv. politiewagen). Het onnodig betreden van de busstrook is een zware overtreding.'
             },
              // Question 8: Lights usage
@@ -173,7 +173,7 @@
                 topic: 'C. Het voertuig',
                 text: 'Wanneer moet u uw dimlichten voeren?',
                 options: ['Alleen als het regent.', 'Vanaf het vallen van de avond tot zonsopgang, of bij verminderde zichtbaarheid.', 'Alleen op de snelweg.'],
-                correctAnswer: 1, // Vanaf het vallen van de avond tot zonsopgang, of bij verminderde zichtbaarheid.
+                correctAnswer: 1, 
                 serious: false,
                 explanation: 'Dimlichten zijn verplicht in de periode tussen het vallen van de avond en zonsopgang, en op elk moment van de dag wanneer de zichtbaarheid beperkt is (bij mist, regen of sneeuw).'
             },
@@ -182,7 +182,7 @@
                 topic: 'B. De weggebruikers',
                 text: 'Wat is de beste strategie bij het naderen van een onoverzichtelijk kruispunt?',
                 options: ['Snel doorrijden om de doorstroming te bevorderen.', 'Remmen, vertragen en klaar zijn om te stoppen.', 'Claxonneren om andere bestuurders te waarschuwen.'],
-                correctAnswer: 1, // Remmen, vertragen en klaar zijn om te stoppen.
+                correctAnswer: 1, 
                 serious: false,
                 explanation: 'Defensief rijden betekent altijd anticiperen op gevaar. Bij een onoverzichtelijk kruispunt moet u altijd vertragen en klaar zijn om te remmen voor plotseling opkomend verkeer of voetgangers.'
             },
@@ -191,43 +191,42 @@
                 topic: 'I. Diversen',
                 text: 'Wanneer mag u de alarmlichten (waarschuwingsknipperlichten) gebruiken?',
                 options: ['Wanneer u geparkeerd staat om boodschappen te doen.', 'Om andere bestuurders te bedanken na een inhaalmanoeuvre.', 'Om andere bestuurders te waarschuwen voor dreigend gevaar of als uw voertuig defect is.'],
-                correctAnswer: 2, // Om andere bestuurders te waarschuwen voor dreigend gevaar of als uw voertuig defect is.
+                correctAnswer: 2, 
                 serious: false,
                 explanation: 'Alarmlichten dienen uitsluitend om andere weggebruikers te waarschuwen voor een dreigend gevaar of wanneer uw voertuig defect is en een obstakel vormt.'
             },
         ];
         
         // Pad the question bank to 50 questions (for the exam simulation)
-        // In a real app, you would load a database of 800+ questions.
+        // In een echte app zou je hier een database van 800+ unieke vragen laden.
         for (let i = mockQuestions.length; i < 50; i++) {
             const baseQuestion = mockQuestions[i % 10];
-            // Ensure explanations are consistent even for generated questions
             const explanationText = baseQuestion.explanation || 'Geen specifieke uitleg beschikbaar voor deze oefenvraag.';
             
             mockQuestions.push({
                 ...baseQuestion,
                 text: baseQuestion.text.replace(`(Vraag ${i % 10 + 1}/50)`, '') + ` (Vraag ${i + 1}/50)`,
-                serious: (i % 5 === 0) ? true : false, // Ensure 10 serious faults total
+                serious: (i % 5 === 0) ? true : false, 
                 explanation: explanationText
             });
         }
         
         // --- APPLICATION STATE ---
-        let currentMode = 'study'; // 'study' or 'exam'
+        let currentMode = 'study'; 
         let currentLessonId = null;
         let currentQuestionIndex = 0;
-        let examAnswers = new Array(50).fill(null); // Stores the index of the selected option
+        let examAnswers = new Array(50).fill(null); 
         let isExamFinished = false;
-        let isAnswerSubmitted = false; // NEW: Flag to control feedback display
+        let isAnswerSubmitted = false; 
 
         // --- UTILITY FUNCTIONS ---
         const $ = (id) => document.getElementById(id);
 
         function setMode(mode) {
             currentMode = mode;
-            currentLessonId = null; // Reset lesson view
+            currentLessonId = null; 
             isExamFinished = false;
-            isAnswerSubmitted = false; // Reset feedback state
+            isAnswerSubmitted = false; 
             
             // Update button styles
             const studyBtn = $('study-btn');
@@ -248,7 +247,7 @@
             }
         }
 
-        // --- STUDY MODE RENDERING (No change in logic, only structure updated) ---
+        // --- STUDY MODE RENDERING ---
         function renderStudyMode() {
             if (currentLessonId) {
                 renderLessonView();
@@ -328,7 +327,7 @@
             examAnswers = new Array(50).fill(null);
             currentQuestionIndex = 0;
             isExamFinished = false;
-            isAnswerSubmitted = false; // Reset feedback state
+            isAnswerSubmitted = false; 
             renderExamView();
         }
 
@@ -610,5 +609,4 @@
 
     </script>
 </body>
-
 </html>
