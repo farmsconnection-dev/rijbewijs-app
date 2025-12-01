@@ -385,8 +385,6 @@
                 imageUrl: 'https://placehold.co/500x300/4CAF50/ffffff?text=Groen%20Verkeerslicht', // Groen Licht
                 explanation: 'Groen licht geeft vrije doorgang, maar u moet altijd voorrang verlenen aan overstekende voetgangers op het zebrapad. Dit is een zware fout als u dit niet doet.'
             },
-            // --- NIEUWE VRAGEN (V21 t/m V30) ---
-            
             // Q21 (H. Parkeren): 5m van zebrapad (NIEUW)
             {
                 topic: 'H. Parkeren en stilstaan',
@@ -487,21 +485,210 @@
                 imageUrl: 'https://placehold.co/500x300/0000ff/ffffff?text=Agent%20Gebaar%20(Stoppen)', // Gebaar
                 explanation: 'De aanwijzingen van een bevoegd persoon (politie of verkeersleider) gaan altijd voor op verkeerslichten en verkeersborden. Het negeren hiervan is een zware fout.'
             },
+            // VRAAG 31 t/m 50 (NIEUW) - Unieke Vragen voor Volledige Simulatie
+            // Q31 (E. Inhalen): Rechts inhalen
+            {
+                topic: 'E. Inhalen',
+                text: 'Wanneer is het toegestaan om rechts in te halen?',
+                options: ['Op de snelweg als de linkerrijstrook langzaam rijdt.', 'Als de voorligger linksaf wil slaan en u rechts kunt passeren.', 'Nooit, inhalen moet altijd links gebeuren.'],
+                correctAnswer: 1,
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/f0f0f0/000000?text=Rechts%20Inhalen%20(Situatie)',
+                explanation: 'Rechts inhalen is toegestaan als het voertuig voor u van plan is linksaf te slaan, en u rechts kunt passeren zonder over de pechstrook te rijden. Ook in files of bij bepaalde verkeerslichten is het toegestaan.'
+            },
+            // Q32 (D. Snelheid): Rijden in Zone 30
+            {
+                topic: 'D. Snelheid',
+                text: 'Wat is de maximumsnelheid in een Zone 30?',
+                options: ['30 km/u.', '30 km/u, met tolerantiemarge.', '50 km/u, maar met extra voorzichtigheid.'],
+                correctAnswer: 0,
+                serious: true,
+                imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Belgium_road_sign_C43.svg/100px-Belgium_road_sign_C43.svg.png',
+                explanation: 'De maximumsnelheid in een Zone 30 is strikt 30 km/u. Overtredingen worden zwaar bestraft, omdat deze zones vaak rond scholen liggen.'
+            },
+            // Q33 (C. Voertuig): Bandenprofiel
+            {
+                topic: 'C. Het voertuig',
+                text: 'Wat is de wettelijke minimale profieldiepte voor banden in België?',
+                options: ['1.0 mm.', '1.6 mm.', '2.0 mm.'],
+                correctAnswer: 1,
+                serious: true,
+                imageUrl: 'https://placehold.co/500x300/404040/ffffff?text=Bandenprofiel%201%2C6mm',
+                explanation: 'De wettelijke minimale profieldiepte is 1,6 mm. Rijden met onvoldoende profiel vermindert de grip en is een zware overtreding.'
+            },
+            // Q34 (F. Voorrang): Bord B17 (Driehoek met Pijl)
+            {
+                topic: 'F. Voorrang',
+                text: 'U ziet verkeersbord B17 (driehoek met zwarte pijl en dikke pijl). Wat betekent dit?',
+                options: ['U hebt voorrang op het tegemoetkomende verkeer.', 'U moet voorrang verlenen aan het tegemoetkomende verkeer.', 'Dit bord regelt voorrang op een smalle doorgang.'],
+                correctAnswer: 1,
+                serious: false,
+                imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Belgium_road_sign_B17.svg/100px-Belgium_road_sign_B17.svg.png', // Bord B17
+                explanation: 'Bord B17 (Ronde bord met rode rand en pijl) betekent dat u voorrang moet verlenen aan het tegemoetkomende verkeer. U stopt om de tegenligger te laten passeren.'
+            },
+            // Q35 (B. Weggebruiker): Rijden bij vermoeidheid
+            {
+                topic: 'B. De weggebruikers',
+                text: 'Wat is de beste maatregel om te nemen als u zich vermoeid voelt tijdens het rijden?',
+                options: ['Luider muziek opzetten.', 'Ramen openen voor frisse lucht.', 'Onmiddellijk stoppen en rusten.'],
+                correctAnswer: 2,
+                serious: true,
+                imageUrl: 'https://placehold.co/500x300/B0BEC5/000000?text=Rijvermoeidheid',
+                explanation: 'Vermoeidheid vertraagt uw reactietijd aanzienlijk. Onmiddellijk stoppen en rusten (een powernap) is de enige veilige maatregel. Rijden bij vermoeidheid is een zware fout.'
+            },
+            // Q36 (H. Parkeren): Stilstaan langs een gele onderbroken lijn
+            {
+                topic: 'H. Parkeren en stilstaan',
+                text: 'Wat betekent een gele onderbroken lijn langs de stoep?',
+                options: ['Parkeren is verboden.', 'Stilstaan en parkeren is verboden.', 'Parkeren is toegestaan, stilstaan niet.'],
+                correctAnswer: 0,
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/FFD700/000000?text=Gele%20Onderbroken%20Lijn',
+                explanation: 'Een gele onderbroken lijn verbiedt het parkeren. Stilstaan (voor laden/lossen of in-/uitstappen) is toegestaan, zolang dit niet langer duurt dan nodig.'
+            },
+            // Q37 (I. Diversen): Verlies rijbewijs
+            {
+                topic: 'I. Diverse bepalingen',
+                text: 'Wat moet u doen als u uw rijbewijs verliest?',
+                options: ['Niets, u mag zonder rijden.', 'Aangifte doen bij de politie en een voorlopig bewijs aanvragen bij de gemeente.', 'Een nieuw rijbewijs aanvragen via een online portaal.'],
+                correctAnswer: 1,
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/808080/ffffff?text=Rijbewijs%20Verloren',
+                explanation: 'U moet altijd aangifte doen van verlies of diefstal bij de politie. Met het attest van de politie kunt u bij uw gemeente een nieuw rijbewijs aanvragen. U mag niet rijden zonder geldig document.'
+            },
+            // Q38 (A. Weg): Rechts van de witte lijn (Fietspad)
+            {
+                topic: 'A. De openbare weg',
+                text: 'Mag u op een fietspad rijden dat gescheiden is door een doorlopende witte lijn?',
+                options: ['Ja, bij file.', 'Nee, een fietspad is exclusief voor fietsers.', 'Ja, om een onmiddellijke afslag te nemen.'],
+                correctAnswer: 1,
+                serious: true,
+                imageUrl: 'https://placehold.co/500x300/4CAF50/ffffff?text=Fietspad%20Doorlopende%20Lijn',
+                explanation: 'Een fietspad is een deel van de openbare weg dat uitsluitend bestemd is voor fietsers en bromfietsers klasse A. Het is zwaar verboden om hier met een auto te rijden.'
+            },
+            // Q39 (F. Voorrang): Voorrang op rotonde
+            {
+                topic: 'F. Voorrang',
+                text: 'Wie heeft voorrang bij het oprijden van een rotonde zonder verkeersborden?',
+                options: ['De bestuurder die de rotonde oprijdt.', 'De bestuurder die al op de rotonde rijdt.', 'Voorrang van rechts geldt.'],
+                correctAnswer: 1,
+                serious: false,
+                imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Belgium_road_sign_D5.svg/100px-Belgium_road_sign_D5.svg.png', // D5 Bord Rotonde
+                explanation: 'Op een rotonde (aangeduid met bord D5, of een verkeersplein) heeft verkeer op de rotonde altijd voorrang op verkeer dat de rotonde wil oprijden, tenzij anders aangegeven.'
+            },
+            // Q40 (H. Parkeren): Parkeren bij oprit
+            {
+                topic: 'H. Parkeren en stilstaan',
+                text: 'Mag u parkeren voor een oprit van een privé-eigendom?',
+                options: ['Ja, tenzij de eigenaar een bord plaatst.', 'Nee, dit is verboden.', 'Ja, zolang u de doorgang niet volledig blokkeert.'],
+                correctAnswer: 1,
+                serious: true,
+                imageUrl: 'https://placehold.co/500x300/404040/ffffff?text=Parkeren%20Oprit',
+                explanation: 'Het is verboden om stil te staan of te parkeren voor een inrit/oprit van een privé-eigendom. Dit is een zware fout.'
+            },
+            // Q41 (C. Voertuig): ABS
+            {
+                topic: 'C. Het voertuig',
+                text: 'Wat is het belangrijkste voordeel van een Anti-Blokkeersysteem (ABS)?',
+                options: ['Het vermindert de remweg op droog wegdek.', 'Het voorkomt dat de wielen blokkeren tijdens hard remmen, waardoor u kunt blijven sturen.', 'Het verkort de reactietijd.'],
+                correctAnswer: 1,
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/808080/ffffff?text=ABS%20Systeem',
+                explanation: 'ABS zorgt ervoor dat de wielen blijven rollen tijdens een noodstop, waardoor de bestuurder stuurcontrole behoudt en obstakels kan ontwijken. Het verkort de remweg niet altijd.'
+            },
+            // Q42 (I. Diversen): Ecologisch rijden
+            {
+                topic: 'I. Diverse bepalingen',
+                text: 'Wat is een goede gewoonte voor ecologisch rijden?',
+                options: ['Snel optrekken en de motor in hoge toeren houden.', 'Schakelen bij een laag toerental.', 'De bandenspanning verlagen voor betere grip.'],
+                correctAnswer: 1,
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/008000/ffffff?text=Ecologisch%20Rijden',
+                explanation: 'Vroeg opschakelen (bij een laag toerental, rond 2000-2500 tpm) vermindert het brandstofverbruik en de CO2-uitstoot.'
+            },
+            // Q43 (A. Weg): Buiten de bebouwde kom
+            {
+                topic: 'A. De openbare weg',
+                text: 'Wat is de algemene maximumsnelheid buiten de bebouwde kom op een gewone weg in Vlaanderen (indien geen borden)?',
+                options: ['70 km/u.', '80 km/u.', '90 km/u.'],
+                correctAnswer: 0, // Aangepast naar 70km/u (standaard in Vlaanderen sinds 2017)
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/505050/ffffff?text=Buiten%20Bebouwde%20Kom%2070',
+                explanation: 'Sinds 2017 is de algemene maximumsnelheid op gewone wegen buiten de bebouwde kom in Vlaanderen 70 km/u, tenzij anders aangegeven.'
+            },
+            // Q44 (E. Inhalen): Inhalen op heuveltop
+            {
+                topic: 'E. Inhalen',
+                text: 'Mag u inhalen vlak voor de top van een heuvel waar het zicht beperkt is?',
+                options: ['Ja, als er een onderbroken witte lijn is.', 'Nee, inhalen is verboden op onoverzichtelijke plaatsen.', 'Ja, mits u snel bent.'],
+                correctAnswer: 1,
+                serious: true,
+                imageUrl: 'https://placehold.co/500x300/808080/ffffff?text=Heuveltop%20Onoverzichtelijk',
+                explanation: 'Inhalen is verboden op alle plaatsen waar het zicht onvoldoende is, zoals in een bocht of vlak voor de top van een heuvel. Dit is een zware fout.'
+            },
+            // Q45 (F. Voorrang): Haaietanden
+            {
+                topic: 'F. Voorrang en verkeerslichten',
+                text: 'Wat betekenen "haaietanden" op de rijbaan?',
+                options: ['U moet stoppen.', 'U moet voorrang verlenen.', 'Dit is een waarschuwing voor een zebrapad.'],
+                correctAnswer: 1,
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/000000/ffffff?text=Haaietanden',
+                explanation: 'Haaietanden zijn witte driehoeken op de rijbaan en betekenen dat u voorrang moet verlenen aan het verkeer op de weg die u nadert.'
+            },
+            // Q46 (I. Diversen): Rijbewijspuntensysteem (Huidig)
+            {
+                topic: 'I. Diverse bepalingen',
+                text: 'Heeft België momenteel een operationeel rijbewijspuntensysteem?',
+                options: ['Ja, het is volledig operationeel.', 'Nee, het is wel wettelijk vastgelegd, maar nog niet ingevoerd.', 'Nee, er zijn alleen boetes.'],
+                correctAnswer: 1,
+                serious: false,
+                imageUrl: 'https://placehold.co/500x300/ffcc00/000000?text=Rijbewijs%20Punten',
+                explanation: 'Hoewel het in België wettelijk is vastgelegd, is het rijbewijspuntensysteem nog niet operationeel. Overtredingen leiden tot boetes en eventueel intrekking van het rijbewijs.'
+            },
+            // Q47 (B. Weggebruiker): Dode hoek
+            {
+                topic: 'B. De weggebruikers',
+                text: 'Wat is de beste manier om de dode hoek te controleren voordat u van rijstrook verandert?',
+                options: ['Alleen de binnenspiegel gebruiken.', 'Alleen de zijspiegel gebruiken.', 'Over uw schouder kijken (shoulder check).'],
+                correctAnswer: 2,
+                serious: true,
+                imageUrl: 'https://placehold.co/500x300/000000/ffffff?text=Dode%20Hoek%20Controle',
+                explanation: 'De dode hoek kan niet volledig door spiegels worden afgedekt. U moet altijd over uw schouder kijken (de "shoulder check") voordat u van rijstrook verandert. Dit is een zware fout.'
+            },
+            // Q48 (A. Weg): Autoweg
+            {
+                topic: 'A. De openbare weg',
+                text: 'Wat is de maximumsnelheid op een autoweg (bord F3)?',
+                options: ['120 km/u, net als de snelweg.', '100 km/u.', '90 km/u.'],
+                correctAnswer: 1,
+                serious: false,
+                imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Belgium_road_sign_F3.svg/100px-Belgium_road_sign_F3.svg.png', // F3 Bord Autoweg
+                explanation: 'De maximumsnelheid op een autoweg is 100 km/u, tenzij anders aangegeven (in tegenstelling tot de snelweg, waar dit 120 km/u is).'
+            },
+            // Q49 (H. Parkeren): Parkeren in een tunnel
+            {
+                topic: 'H. Parkeren en stilstaan',
+                text: 'Is stilstaan toegestaan in een tunnel?',
+                options: ['Ja, zolang het niet langer dan 5 minuten duurt.', 'Nee, stilstaan en parkeren zijn beide verboden in tunnels.', 'Alleen op aangewezen parkeerplaatsen.'],
+                correctAnswer: 1,
+                serious: true,
+                imageUrl: 'https://placehold.co/500x300/000000/ffffff?text=Parkeren%20Tunnel',
+                explanation: 'Om veiligheidsredenen is het strikt verboden om stil te staan of te parkeren in een tunnel. Dit is een zware fout.'
+            },
+            // Q50 (D. Snelheid): Rijden bij dichte mist
+            {
+                topic: 'D. Snelheid',
+                text: 'Als het zicht door mist minder is dan 50 meter, wat is dan de maximumsnelheid die u mag rijden?',
+                options: ['70 km/u.', '50 km/u.', 'U moet uw snelheid aanpassen en is meestal lager dan 50 km/u.'],
+                correctAnswer: 2,
+                serious: true,
+                imageUrl: 'https://placehold.co/500x300/A9A9A9/000000?text=Dichte%20Mist%20Rijden',
+                explanation: 'Bij dichte mist is het niet wettelijk vastgelegd op 50 km/u, maar u moet uw snelheid aanpassen aan de zichtbaarheid. Als het zicht minder is dan 50 meter, mag u wettelijk niet sneller dan 50 km/u rijden, maar vaak is minder nodig voor veiligheid. Dit is een zware fout.'
+            },
         ];
         
-        // Pad the question bank to 50 questions (for the exam simulation)
-        // Use modulo 30 to cycle through the 30 unique questions
-        for (let i = mockQuestions.length; i < 50; i++) {
-            const baseQuestion = mockQuestions[i % 30]; 
-            const explanationText = baseQuestion.explanation || 'Geen specifieke uitleg beschikbaar voor deze oefenvraag.';
-            
-            mockQuestions.push({
-                ...baseQuestion,
-                text: baseQuestion.text.replace(`(Vraag ${i % 30 + 1}/50)`, '') + ` (Vraag ${i + 1}/50)`,
-                serious: (i % 5 === 0) ? true : false, 
-                explanation: explanationText
-            });
-        }
+        // De JS-lus om de vragenbank aan te vullen is nu verwijderd omdat we 50 unieke vragen hebben.
         
         // --- APPLICATION STATE ---
         let currentMode = 'study'; 
@@ -510,8 +697,8 @@
         let examAnswers = new Array(50).fill(null); 
         let isExamFinished = false;
         let isAnswerSubmitted = false; 
-        let currentQuizQuestions = []; // Nieuwe state voor de gefilterde quiz
-        let isLessonQuiz = false; // Nieuwe flag om quiztype te bepalen
+        let currentQuizQuestions = []; 
+        let isLessonQuiz = false; 
 
         // --- UTILITY FUNCTIONS ---
         const $ = (id) => document.getElementById(id);
@@ -521,7 +708,7 @@
             currentLessonId = null; 
             isExamFinished = false;
             isAnswerSubmitted = false; 
-            isLessonQuiz = false; // Reset quiz type
+            isLessonQuiz = false; 
             
             // Update button styles
             const studyBtn = $('study-btn');
@@ -642,7 +829,7 @@
         function startExam() {
             // Reset state for a new full exam
             isLessonQuiz = false;
-            currentQuizQuestions = mockQuestions; // Gebruik de volledige set
+            currentQuizQuestions = mockQuestions; // Gebruik de volledige set (50 unieke vragen)
             currentQuestionIndex = 0;
             isAnswerSubmitted = false;
             isExamFinished = false;
