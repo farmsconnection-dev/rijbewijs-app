@@ -149,19 +149,19 @@
                     id: 'F1', 
                     name: 'Voorrang van rechts', 
                     content: 'De basisregel is dat op kruispunten waar geen verkeerslichten, borden, of bevoegde personen zijn, de bestuurder van rechts voorrang heeft. Uitzonderingen zijn onder meer rotondes, onverharde wegen en straten die eindigen in een T-splitsing (waarbij de bestuurder die van de onverharde weg komt, of de bestuurder op de dwarse weg, voorrang moet verlenen). \n\n**Voorrangsborden:** Borden (B1, B3, B5) heffen de regel van voorrang van rechts op.', 
-                    questions: 10 // F-vragen: 10 Qs
+                    questions: 10 // Correcte telling: 10 Qs
                 },
                 { 
                     id: 'F2', 
                     name: 'Verkeerslichten en tekens', 
                     content: 'Verkeerslichten (rood, oranje, groen) bepalen wie er mag rijden. **Rood** betekent stoppen. **Oranje** betekent stoppen, tenzij u dit niet meer veilig kunt. **Groen** betekent doorrijden. \n\n**Bevoegde Personen:** De bevelen van een bevoegd persoon (politie of verkeersleider) gaan altijd voor op verkeerslichten en verkeersborden.', 
-                    questions: 10 // F-vragen: 10 Qs
+                    questions: 10 // Correcte telling: 10 Qs
                 },
                 { 
                     id: 'F3', 
                     name: 'Kruisen en inhalen', 
                     content: 'Inhalen moet altijd links gebeuren. Inhalen is verboden op:\n* Kruispunten (tenzij het om een rotonde gaat of als u op een voorrangsweg rijdt).\n* Op of vlak voor een overweg.\n* Op bruggen, in tunnels, of bij een onoverzichtelijke bocht of top van een helling.', 
-                    questions: 10 // F-vragen: 10 Qs
+                    questions: 10 // Correcte telling: 10 Qs
                 },
             ]},
             { id: 'I', title: 'I. Diverse bepalingen', color: 'bg-pink-100', lessons: [
@@ -180,277 +180,9 @@
             ]},
         ];
 
-        // --- SAMPLE QUESTIONS (Simulating the Exam) ---
+        // --- SAMPLE QUESTIONS (50 UNIQUE) ---
         // De 50 unieke vragen zijn gegroepeerd per thema.
         const mockQuestions = [
-            // A. De openbare weg (6 Vragen)
-            // Q7 (A. Weg): Busstrook
-            {
-                topic: 'A. De openbare weg',
-                text: 'U rijdt over een busstrook aangeduid met een doorlopende witte lijn. Mag u deze busstrook gebruiken?',
-                options: ['Ja, indien u een bus inhaalt.', 'Nee, nooit, tenzij u een bevoegde wagen bent.', 'Ja, om af te slaan, indien toegestaan door de onderbroken lijn.'],
-                correctAnswer: 1, 
-                serious: true,
-                imageUrl: 'https://placehold.co/500x300/000000/ffcc00?text=Busstrook%20Doorlopende%20Lijn',
-                explanation: 'Een busstrook met een doorlopende witte lijn mag door geen enkele andere weggebruiker gebruikt worden, tenzij u een bevoegd voertuig bent (bijv. politiewagen). Het onnodig betreden van de busstrook is een zware overtreding.'
-            },
-            // Q38 (A. Weg): Rechts van de witte lijn (Fietspad)
-            {
-                topic: 'A. De openbare weg',
-                text: 'Mag u op een fietspad rijden dat gescheiden is door een doorlopende witte lijn?',
-                options: ['Ja, bij file.', 'Nee, een fietspad is exclusief voor fietsers.', 'Ja, om een onmiddellijke afslag te nemen.'],
-                correctAnswer: 1,
-                serious: true,
-                imageUrl: 'https://placehold.co/500x300/4CAF50/ffffff?text=Fietspad%20Doorlopende%20Lijn',
-                explanation: 'Een fietspad is een deel van de openbare weg dat uitsluitend bestemd is voor fietsers en bromfietsers klasse A. Het is zwaar verboden om hier met een auto te rijden.'
-            },
-            // Q43 (A. Weg): Buiten de bebouwde kom
-            {
-                topic: 'A. De openbare weg',
-                text: 'Wat is de algemene maximumsnelheid buiten de bebouwde kom op een gewone weg in Vlaanderen (indien geen borden)?',
-                options: ['70 km/u.', '80 km/u.', '90 km/u.'],
-                correctAnswer: 0, 
-                serious: false,
-                imageUrl: 'https://placehold.co/500x300/505050/ffffff?text=Buiten%20Bebouwde%20Kom%2070',
-                explanation: 'Sinds 2017 is de algemene maximumsnelheid op gewone wegen buiten de bebouwde kom in Vlaanderen 70 km/u, tenzij anders aangegeven.'
-            },
-            // Q48 (A. Weg): Autoweg
-            {
-                topic: 'A. De openbare weg',
-                text: 'Wat is de maximumsnelheid op een autoweg (bord F3)?',
-                options: ['120 km/u, net als de snelweg.', '100 km/u.', '90 km/u.'],
-                correctAnswer: 1,
-                serious: false,
-                imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Belgium_road_sign_F3.svg/100px-Belgium_road_sign_F3.svg.png', 
-                explanation: 'De maximumsnelheid op een autoweg is 100 km/u, tenzij anders aangegeven (in tegenstelling tot de snelweg, waar dit 120 km/u is).'
-            },
-            // Q11 (A. Weg): Rotonde
-            {
-                topic: 'A. De openbare weg',
-                text: 'Wat is verplicht bij het verlaten van een rotonde?',
-                options: ['Voorrang verlenen aan alle voetgangers.', 'Het gebruik van de richtingaangever (pinker).', 'Claxonneren om andere bestuurders te waarschuwen.'],
-                correctAnswer: 1,
-                serious: false,
-                imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Belgium_road_sign_D5.svg/100px-Belgium_road_sign_D5.svg.png', 
-                explanation: 'Volgens de verkeersregels is het gebruik van de richtingaangever (pinker) verplicht bij het verlaten van een rotonde om andere weggebruikers te informeren over uw intenties. '
-            },
-            
-            // A. De openbare weg (Vragen over Stilstaan/Parkeren)
-            // Q27 (A. Weg): Pechstrook
-            {
-                topic: 'A. De openbare weg',
-                text: 'Wanneer mag u over de pechstrook rijden op de snelweg?',
-                options: ['Bij zware file om de afrit te bereiken.', 'Alleen in geval van nood (panne of ongeval).', 'Als dit is aangegeven door de signalisatie (Groene Pijl).'],
-                correctAnswer: 1,
-                serious: true,
-                imageUrl: 'https://placehold.co/500x300/ffcc00/ffffff?text=Pechstrook%20Noodgeval', 
-                explanation: 'De pechstrook is uitsluitend voor noodgevallen (panne, ongeval, ziekte). Rijdend verkeer (zelfs bij file) is er verboden, tenzij anders aangegeven door een dynamisch verkeersbord. '
-            },
-            // Q49 (H. Parkeren): Parkeren in een tunnel
-            {
-                topic: 'H. Parkeren en stilstaan',
-                text: 'Is stilstaan toegestaan in een tunnel?',
-                options: ['Ja, zolang het niet langer dan 5 minuten duurt.', 'Nee, stilstaan en parkeren zijn beide verboden in tunnels.', 'Alleen op aangewezen parkeerplaatsen.'],
-                correctAnswer: 1,
-                serious: true,
-                imageUrl: 'https://placehold.co/500x300/000000/ffffff?text=Parkeren%20Tunnel',
-                explanation: 'Om veiligheidsredenen is het strikt verboden om stil te staan of te parkeren in een tunnel. Dit is een zware fout.'
-            },
-            // Q36 (H. Parkeren): Stilstaan langs een gele onderbroken lijn
-            {
-                topic: 'H. Parkeren en stilstaan',
-                text: 'Wat betekent een gele onderbroken lijn langs de stoep?',
-                options: ['Parkeren is verboden.', 'Stilstaan en parkeren is verboden.', 'Parkeren is toegestaan, stilstaan niet.'],
-                correctAnswer: 0,
-                serious: false,
-                imageUrl: 'https://placehold.co/500x300/FFD700/000000?text=Gele%20Onderbroken%20Lijn',
-                explanation: 'Een gele onderbroken lijn verbiedt het parkeren. Stilstaan (voor laden/lossen of in-/uitstappen) is toegestaan, zolang dit niet langer duurt dan nodig.'
-            },
-            // Q40 (H. Parkeren): Parkeren bij oprit
-            {
-                topic: 'H. Parkeren en stilstaan',
-                text: 'Mag u parkeren voor een oprit van een privé-eigendom?',
-                options: ['Ja, tenzij de eigenaar een bord plaatst.', 'Nee, dit is verboden.', 'Ja, zolang u de doorgang niet volledig blokkeert.'],
-                correctAnswer: 1,
-                serious: true,
-                imageUrl: 'https://placehold.co/500x300/404040/ffffff?text=Parkeren%20Oprit',
-                explanation: 'Het is verboden om stil te staan of te parkeren voor een inrit/oprit van een privé-eigendom. Dit is een zware fout.'
-            },
-            // Q21 (H. Parkeren): 5m van zebrapad
-            {
-                topic: 'H. Parkeren en stilstaan',
-                text: 'Wat is de minimale afstand die u moet bewaren bij het parkeren voor een zebrapad?',
-                options: ['3 meter.', '5 meter.', '10 meter.'],
-                correctAnswer: 1,
-                serious: true,
-                imageUrl: 'https://placehold.co/500x300/ff9900/ffffff?text=Parkeren%20bij%20Zebrapad%205m', 
-                explanation: 'U mag niet stilstaan of parkeren op minder dan 5 meter voor de oversteekplaats voor voetgangers. Dit is een zware fout. '
-            },
-            
-            // F. Voorrang en verkeerslichten (10 Vragen)
-            // Q1 (F. Voorrang): B1 Bord
-            {
-                topic: 'F. Voorrang',
-                text: 'U nadert een kruispunt en ziet het B1 bord (omgekeerde driehoek). Wat moet u doen?',
-                options: ['U heeft voorrang op alle andere voertuigen.', 'U moet voorrang verlenen aan bestuurders die van rechts komen.', 'U moet voorrang verlenen aan bestuurders op de dwarse weg.'],
-                correctAnswer: 2, 
-                serious: false,
-                imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Belgium_road_sign_B1.svg/100px-Belgium_road_sign_B1.svg.png', 
-                explanation: 'Het B1 bord, de omgekeerde driehoek met de rode rand, is het voorrangsbord. Het betekent dat u voorrang moet verlenen aan de bestuurders op de dwarse weg, zowel van links als van rechts.'
-            },
-            // Q17 (F. Voorrang): Voorrang van rechts bij T-splitsing
-            {
-                topic: 'F. Voorrang',
-                text: 'Op een T-splitsing zonder borden, welke bestuurder moet voorrang verlenen?',
-                options: ['De bestuurder die rechtdoor gaat.', 'De bestuurder die van links komt.', 'De bestuurder die van de weg komt die eindigt.'],
-                correctAnswer: 2,
-                serious: false,
-                imageUrl: 'https://placehold.co/500x300/000000/ffffff?text=T-splitsing%20Zonder%20Borden', 
-                explanation: 'Op een T-splitsing moet de bestuurder die van de weg komt die eindigt (meestal de korte poot van de T), voorrang verlenen aan de bestuurders die op de doorgaande weg rijden.'
-            },
-            // Q20 (F. Verkeerslichten): Groen licht
-            {
-                topic: 'F. Verkeerslichten en tekens',
-                text: 'U nadert een kruispunt met een groen verkeerslicht. Mag u blindelings doorrijden?',
-                options: ['Ja, groen licht betekent altijd vrije doorgang.', 'Nee, u moet voorrang verlenen aan overstekende voetgangers.', 'Ja, tenzij er een bevoegd persoon het verkeer regelt.'],
-                correctAnswer: 1,
-                serious: true,
-                imageUrl: 'https://placehold.co/500x300/4CAF50/ffffff?text=Groen%20Verkeerslicht', 
-                explanation: 'Groen licht geeft vrije doorgang, maar u moet altijd voorrang verlenen aan overstekende voetgangers op het zebrapad. Dit is een zware fout als u dit niet doet.'
-            },
-            // Q23 (F. Verkeerslichten): Gele knipperlichten
-            {
-                topic: 'F. Verkeerslichten en tekens',
-                text: 'Wat betekent een geel knipperlicht op een kruispunt?',
-                options: ['U moet stoppen en wachten op het groene licht.', 'U mag doorrijden, maar u moet extra voorzichtig zijn en de voorrangsregels respecteren.', 'U moet voorrang verlenen aan voertuigen van rechts.'],
-                correctAnswer: 1,
-                serious: false,
-                imageUrl: 'https://placehold.co/500x300/fdd835/000000?text=Geel%20Knipperlicht', 
-                explanation: 'Een geel knipperlicht betekent dat de verkeerslichten buiten werking zijn. U moet de algemene voorrangsregels (voorrang van rechts, borden) toepassen en extra voorzichtig zijn.'
-            },
-            // Q30 (F. Verkeerslichten): Teken van de politie
-            {
-                topic: 'F. Voorrang en verkeerslichten',
-                text: 'U nadert een kruispunt. De verkeerslichten staan op groen, maar een politieagent gebaart dat u moet stoppen. Wat moet u doen?',
-                options: ['De agent negeren, want het licht staat op groen.', 'Stoppen, want de aanwijzingen van een bevoegd persoon gaan voor.', 'Doorrijden, maar langzaam.'],
-                correctAnswer: 1,
-                serious: true,
-                imageUrl: 'https://placehold.co/500x300/0000ff/ffffff?text=Agent%20Gebaar%20(Stoppen)', 
-                explanation: 'De aanwijzingen van een bevoegd persoon (politie of verkeersleider) gaan altijd voor op verkeerslichten en verkeersborden. Het negeren hiervan is een zware fout.'
-            },
-            // Q34 (F. Voorrang): Bord B17 (Driehoek met Pijl)
-            {
-                topic: 'F. Voorrang',
-                text: 'U ziet verkeersbord B17 (driehoek met zwarte pijl en dikke pijl). Wat betekent dit?',
-                options: ['U hebt voorrang op het tegemoetkomende verkeer.', 'U moet voorrang verlenen aan het tegemoetkomende verkeer.', 'Dit bord regelt voorrang op een smalle doorgang.'],
-                correctAnswer: 1,
-                serious: false,
-                imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Belgium_road_sign_B17.svg/100px-Belgium_road_sign_B17.svg.png', 
-                explanation: 'Bord B17 (Ronde bord met rode rand en pijl) betekent dat u voorrang moet verlenen aan het tegemoetkomende verkeer. U stopt om de tegenligger te laten passeren.'
-            },
-            // Q39 (F. Voorrang): Voorrang op rotonde
-            {
-                topic: 'F. Voorrang',
-                text: 'Wie heeft voorrang bij het oprijden van een rotonde zonder verkeersborden?',
-                options: ['De bestuurder die de rotonde oprijdt.', 'De bestuurder die al op de rotonde rijdt.', 'Voorrang van rechts geldt.'],
-                correctAnswer: 1,
-                serious: false,
-                imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Belgium_road_sign_D5.svg/100px-Belgium_road_sign_D5.svg.png', 
-                explanation: 'Op een rotonde (aangeduid met bord D5, of een verkeersplein) heeft verkeer op de rotonde altijd voorrang op verkeer dat de rotonde wil oprijden, tenzij anders aangegeven.'
-            },
-            // Q45 (F. Voorrang): Haaietanden
-            {
-                topic: 'F. Voorrang en verkeerslichten',
-                text: 'Wat betekenen "haaietanden" op de rijbaan?',
-                options: ['U moet stoppen.', 'U moet voorrang verlenen.', 'Dit is een waarschuwing voor een zebrapad.'],
-                correctAnswer: 1,
-                serious: false,
-                imageUrl: 'https://placehold.co/500x300/000000/ffffff?text=Haaietanden',
-                explanation: 'Haaietanden zijn witte driehoeken op de rijbaan en betekenen dat u voorrang moet verlenen aan het verkeer op de weg die u nadert.'
-            },
-            // Q16 (F. Voorrang): Oranje Licht
-            {
-                topic: 'F. Voorrang en verkeerslichten',
-                text: 'Wat moet u doen bij een oranje verkeerslicht?',
-                options: ['Doorrijden om te voorkomen dat u te laat bent.', 'Stoppen, tenzij u de stoplijn niet meer veilig kunt passeren.', 'Versnellen om snel de kruising over te steken.'],
-                correctAnswer: 1,
-                serious: true,
-                imageUrl: 'https://placehold.co/500x300/ff9800/ffffff?text=Oranje%20Verkeerslicht', 
-                explanation: 'Oranje licht betekent dat u moet stoppen, tenzij u niet meer op een veilige manier vóór het licht tot stilstand kunt komen. Doorrijden is een zware fout. '
-            },
-            // Q29 (H. Parkeren): Parkeerverbod (E1 Bord)
-            {
-                topic: 'F. Voorrang en verkeerslichten', // Valt onder F, regels van stilstaan en parkeren
-                text: 'Mag u uw voertuig stilstaan (niet parkeren) op een plek waar een E1 bord (parkeerverbod) staat?',
-                options: ['Ja, stilstaan is toegestaan.', 'Nee, stilstaan en parkeren is verboden.', 'Alleen om iemand te laten in- of uitstappen.'],
-                correctAnswer: 0,
-                serious: false,
-                imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Belgium_road_sign_E1.svg/100px-Belgium_road-sign_E1.svg.png', // E1 Bord
-                explanation: 'Verkeersbord E1 verbiedt alleen parkeren (langer dan nodig voor in- of uitstappen of laden/lossen). Stilstaan is dus in principe toegestaan, tenzij de verkeersregels dit ook verbieden (bijv. op een zebrapad).'
-            },
-            
-            // E. Inhalen
-            // Q6 (E. Inhalen): Tram inhalen
-            {
-                topic: 'E. Inhalen',
-                text: 'Is het toegestaan om een tram in te halen aan de linkerkant?',
-                options: ['Ja, altijd.', 'Nee, trams moeten altijd rechts ingehaald worden.', 'Ja, wanneer de breedte van de rijbaan dit toelaat en de tram stilstaat.'],
-                correctAnswer: 2, 
-                serious: false,
-                imageUrl: 'https://placehold.co/500x300/808080/ffffff?text=Tram%20Inhalen%20Situatie%20(Links)',
-                explanation: 'Een tram moet in principe rechts ingehaald worden. Inhalen aan de linkerkant is echter toegestaan als de breedte van de rijbaan het niet toelaat aan de rechterkant, of als de tram stilstaat om passagiers te laten in- en uitstappen.'
-            },
-            // Q12 (E. Inhalen): Overweg
-            {
-                topic: 'E. Inhalen',
-                text: 'Is het toegestaan om een ander voertuig in te halen op een overweg?',
-                options: ['Ja, tenzij de slagbomen gesloten zijn.', 'Nee, inhalen is verboden op en vlak voor een overweg.', 'Ja, zolang er geen tegenliggers zijn.'],
-                correctAnswer: 1,
-                serious: true,
-                imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Belgium_road_sign_A45.svg/100px-Belgium_road_sign_A45.svg.png', 
-                explanation: 'Inhalen is absoluut verboden op een overweg, ongeacht of de slagbomen open of dicht zijn. Dit wordt als een zware fout beschouwd. '
-            },
-            // Q24 (E. Inhalen): Inhalen van een fietser buiten de bebouwde kom
-            {
-                topic: 'E. Inhalen',
-                text: 'Wat is de minimale zijdelingse afstand die u moet bewaren bij het inhalen van een fietser buiten de bebouwde kom?',
-                options: ['50 cm.', '1 meter.', '1,5 meter.'],
-                correctAnswer: 2,
-                serious: true,
-                imageUrl: 'https://placehold.co/500x300/03a9f4/ffffff?text=1%2C5m%20Inhaalafstand%20Fietser', 
-                explanation: 'Bij het inhalen van fietsers en voetgangers moet u buiten de bebouwde kom minimaal 1,5 meter afstand bewaren. Binnen de bebouwde kom is dit 1 meter. Dit is een zware fout.'
-            },
-            // Q31 (E. Inhalen): Rechts inhalen
-            {
-                topic: 'E. Inhalen',
-                text: 'Wanneer is het toegestaan om rechts in te halen?',
-                options: ['Op de snelweg als de linkerrijstrook langzaam rijdt.', 'Als de voorligger linksaf wil slaan en u rechts kunt passeren.', 'Nooit, inhalen moet altijd links gebeuren.'],
-                correctAnswer: 1,
-                serious: false,
-                imageUrl: 'https://placehold.co/500x300/f0f0f0/000000?text=Rechts%20Inhalen%20(Situatie)',
-                explanation: 'Rechts inhalen is toegestaan als het voertuig voor u van plan is linksaf te slaan, en u rechts kunt passeren zonder over de pechstrook te rijden. Ook in files of bij bepaalde verkeerslichten is het toegestaan.'
-            },
-            // Q44 (E. Inhalen): Inhalen op heuveltop
-            {
-                topic: 'E. Inhalen',
-                text: 'Mag u inhalen vlak voor de top van een heuvel waar het zicht beperkt is?',
-                options: ['Ja, als er een onderbroken witte lijn is.', 'Nee, inhalen is verboden op onoverzichtelijke plaatsen.', 'Ja, mits u snel bent.'],
-                correctAnswer: 1,
-                serious: true,
-                imageUrl: 'https://placehold.co/500x300/808080/ffffff?text=Heuveltop%20Onoverzichtelijk',
-                explanation: 'Inhalen is verboden op alle plaatsen waar het zicht onvoldoende is, zoals in een bocht of vlak voor de top van een heuvel. Dit is een zware fout.'
-            },
-            // Q31 (E. Inhalen): Dubbele lijnen (Extra vraag voor 50 totaal)
-            {
-                topic: 'E. Inhalen',
-                text: 'Wat betekent een doorlopende dubbele witte streep in het midden van de rijbaan?',
-                options: ['U mag de streep overschrijden om in te halen.', 'U mag de streep nooit overschrijden of erover rijden.', 'U mag de streep overschrijden om een obstakel te ontwijken.'],
-                correctAnswer: 1,
-                serious: true,
-                imageUrl: 'https://placehold.co/500x300/000000/ffffff?text=Dubbele%20Witte%20Lijn',
-                explanation: 'Een doorlopende dubbele witte streep mag u onder geen enkele omstandigheid overschrijden of overrijden. Dit is een zware fout.'
-            },
-            
             // A. De openbare weg (5 Qs)
             // Q7 (A. Weg): Busstrook
             {
@@ -460,7 +192,7 @@
                 correctAnswer: 1, 
                 serious: true,
                 imageUrl: 'https://placehold.co/500x300/000000/ffcc00?text=Busstrook%20Doorlopende%20Lijn',
-                explanation: 'Een busstrook met een doorlopende witte lijn mag door geen enkele andere weggebruiker gebruikt worden, tenzij u een bevoegd voertuig bent (bijv. politiewagen). Het onnodig betreden van de busstrook is een zware overtreding.'
+                explanation: 'Een busstrook met een doorlopende witte lijn mag door geen enkele andere weggebruiker gebruikt worden, tenzij u een bevoegde wagen bent (bijv. politiewagen). Het onnodig betreden van de busstrook is een zware overtreding.'
             },
             // Q38 (A. Weg): Rechts van de witte lijn (Fietspad)
             {
@@ -504,7 +236,7 @@
             },
             
             // A. De openbare weg (Vragen over Stilstaan/Parkeren - 5 Qs)
-            // Q27 (A. Weg): Pechstrook
+            // Q27 (H. Parkeren): Pechstrook
             {
                 topic: 'H. Parkeren en stilstaan',
                 text: 'Wanneer mag u over de pechstrook rijden op de snelweg?',
@@ -812,7 +544,7 @@
                 imageUrl: 'https://placehold.co/500x300/ffeb3b/000000?text=30m%20Gevarendriehoek', 
                 explanation: 'Binnen de bebouwde kom moet de gevarendriehoek op 30 meter afstand geplaatst worden, tenzij dit niet mogelijk is. Op de snelweg is dit 100 meter. '
             },
-            // Q37 (I. Diversen): Verlies rijbewijs (Gaat naar B, maar blijft hier om de 50 Qs vol te maken)
+            // Q37 (I. Diversen): Verlies rijbewijs
             {
                 topic: 'I. Diverse bepalingen',
                 text: 'Wat moet u doen als u uw rijbewijs verliest?',
@@ -822,7 +554,7 @@
                 imageUrl: 'https://placehold.co/500x300/808080/ffffff?text=Rijbewijs%20Verloren',
                 explanation: 'U moet altijd aangifte doen van verlies of diefstal bij de politie. Met het attest van de politie kunt u bij uw gemeente een nieuw rijbewijs aanvragen. U mag niet rijden zonder geldig document.'
             },
-            // Q37 (I. Diversen): Verlies rijbewijs (Gaat naar B, maar blijft hier om de 50 Qs vol te maken)
+            // Q37 (I. Diversen): Belangrijkste doel Gevarendriehoek
             {
                 topic: 'I. Diverse bepalingen',
                 text: 'Wat is het belangrijkste doel van de gevarendriehoek?',
